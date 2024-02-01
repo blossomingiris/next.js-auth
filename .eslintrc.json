@@ -1,3 +1,11 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next", "plugin:@typescript-eslint/recommended", "prettier"],
+  "rules": {
+    "no-var": "error",
+    "prefer-const": "warn",
+    "max-lines": ["warn", { "max": 150 }],
+    "complexity": ["warn", 10],
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "warn"
+  }
 }
