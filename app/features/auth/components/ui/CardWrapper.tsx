@@ -1,10 +1,11 @@
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/Card'
 import { ReactNode } from 'react'
 
-import { BackButton } from './BackButton'
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/Card'
+
+import SocialMediaAuth from '../SocialMediaAuth'
+import BackButton from './BackButton'
 import CardOptionsLine from './CardOptionsLine'
 import CardTitle from './CardTitle'
-import SocialMediaGroupButtons from './SocialMediaGroupButtons'
 
 type CardWrapperProps = {
   children: ReactNode
@@ -30,7 +31,7 @@ export default function CardWrapper(props: CardWrapperProps) {
         <CardTitle title={headerTitle} description={headerDescription} />
       </CardHeader>
       <CardContent>
-        <SocialMediaGroupButtons />
+        <SocialMediaAuth />
         <CardOptionsLine />
         {children}
       </CardContent>

@@ -1,6 +1,7 @@
-import { animation, opacity } from '@/lib/animations'
 import { motion } from 'framer-motion'
 import { MdOutlineCheckCircleOutline } from 'react-icons/md'
+
+import { animation, opacity } from '@/lib/animations'
 
 type FormErrorProps = {
   message?: string
@@ -13,7 +14,7 @@ export const FormSuccess = (props: FormErrorProps) => {
   return (
     <motion.div
       key="success"
-      className="bg-emerald-500/15 p-3 rounded-md flex items-center text-sm text-emerald-500 gap-1"
+      className="bg-emerald-500/15 p-3 rounded-md flex items-center text-sm text-emerald-500 gap-1 mb-6"
       {...animation(opacity)}
     >
       <MdOutlineCheckCircleOutline size={22} className="flex-shrink-0" />

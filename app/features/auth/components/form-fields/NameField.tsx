@@ -10,8 +10,8 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from '@/components/ui/Form'
+import { FormMessage } from '@/components/ui/FormMessage'
 import { Input } from '@/components/ui/Input'
 
 type NameFieldProps = {
@@ -32,8 +32,9 @@ type NameFieldProps = {
 }
 
 export default function NameField(props: NameFieldProps) {
-  const [isNameFocused, setIsNameFocused] = useState(false)
   const { form, name, placeholder, label, hasAutoFocus = false } = props
+  const [isNameFocused, setIsNameFocused] = useState(hasAutoFocus)
+
   return (
     <FormField
       control={form.control}
@@ -54,7 +55,7 @@ export default function NameField(props: NameFieldProps) {
               />
               <LuUser
                 className={cn(
-                  'absolute right-[9px] text-muted-foreground top-[11px]',
+                  'absolute right-[9px] text-muted-foreground top-[11px] ml-2 bg-card',
                   {
                     'text-primary': isNameFocused,
                   },

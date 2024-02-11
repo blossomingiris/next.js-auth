@@ -26,29 +26,18 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-model Session {
-  id           String   @id @default(cuid()) @map("_id")
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+enum UserRole {
+  USER
+  ADMINISTRATOR
 }
 
 model User {
   id            String    @id @default(cuid()) @map("_id")
-  firstName     String?
-  lastName      String?
+  name          String
   password      String?
-  email         String?   @unique
+  role          UserRole  @default(USER)
+  image         String?
+  email         String    @unique
   emailVerified DateTime?
   accounts      Account[]
-  sessions      Session[]
-}
-
-model VerificationToken {
-  identifier String   @id @map("_id")
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
 }

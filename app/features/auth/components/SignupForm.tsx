@@ -10,23 +10,23 @@ import * as z from 'zod'
 import { signup } from '@/actions/signup'
 
 import CardWrapper from '@/app/features/auth/components/ui/CardWrapper'
-import { routePaths } from '@/app/routes/routes-path'
+import { routePaths } from '@/app/routes/routes'
 
-import { Button } from '@/components/ui/Button'
+import { validationSchema } from '@/lib/validationSchema'
+
 import { Form } from '@/components/ui/Form'
 import { FormError } from '@/components/ui/FormError'
 import { FormSuccess } from '@/components/ui/FormSuccess'
-
-import { validationSchema } from '@/schemas'
 
 import usePasswordValidation from '../hooks/usePasswordValidation'
 import PasswordCriteriaList from './PasswordCriteriaList'
 import EmailField from './form-fields/EmailField'
 import NameField from './form-fields/NameField'
 import PasswordField from './form-fields/PasswordField'
+import FormSubmitButton from './ui/FormSubmitButton'
 
 export function SignupForm() {
-  const [switchIcon, setSwitchIcon] = useState(false)
+  const [switchPasswordIcon, setSwitchPasswordIcon] = useState(false)
   const [isMessageVisible, setMessageVisible] = useState(false)
   const [isPasswordComplexityVisible, setIsPasswordComplexityVisible] =
     useState(true)
@@ -68,7 +68,7 @@ export function SignupForm() {
           })
         form.reset()
       })
-      setSwitchIcon(false)
+      setSwitchPasswordIcon(false)
     }
     showErrorOrSuccessMessage()
   }
@@ -101,7 +101,7 @@ export function SignupForm() {
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onFormSubmit)}>
-          <div className="space-y-6 mb-7">
+          <div className="space-y-4 mb-7">
             <NameField
               form={form}
               name="firstName"
@@ -118,8 +118,8 @@ export function SignupForm() {
             <EmailField name="email" />
             <div>
               <PasswordField
-                switchIcon={switchIcon}
-                setSwitchIcon={setSwitchIcon}
+                switchPasswordIcon={switchPasswordIcon}
+                setSwitchPasswordIcon={setSwitchPasswordIcon}
                 name="password"
                 handlePasswordValidationChange={handlePasswordValidationChange}
                 setIsPasswordComplexityVisible={setIsPasswordComplexityVisible}
@@ -142,13 +142,7 @@ export function SignupForm() {
           <AnimatePresence>
             {isMessageVisible && <FormSuccess message={hasSuccess} />}
           </AnimatePresence>
-          <Button
-            className="w-full font-semibold text-lg active:scale-95 mt-5 transition-all duration-200"
-            size="lg"
-            disabled={isPending}
-          >
-            Sign Up
-          </Button>
+          <FormSubmitButton label="Sign Up" hasSpinner={isPending} />
         </form>
       </Form>
     </CardWrapper>

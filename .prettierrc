@@ -15,9 +15,10 @@
 		"^@/actions/(.*)$",
     "^@/app/(.*)$",
     "^@/lib/(.*)$",
+		"^@/helpers/(.*)$",
     "^@/components/ui/(.*)$",
     "^@/components/(.*)$",
-		"^@/schemas",
+		"^@/auth",
 		"^@/types/(.*)$",
 		"^\\.",
     "^\\.."
@@ -31,4 +32,5 @@
     "caseInsensitive": true
   },
 	"plugins": ["@trivago/prettier-plugin-sort-imports"]
+
 }

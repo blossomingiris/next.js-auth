@@ -1,13 +1,14 @@
 'use server'
 
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 import * as z from 'zod'
 
 import db from '@/lib/db'
+import { validationSchema } from '@/lib/validationSchema'
 
-import { validationSchema } from '@/schemas'
+import { getUserByCondition } from '@/helpers/getUserByCondition'
 
-//progressive enhancement
+//?progressive enhancement
 export async function signup(values: z.infer<typeof validationSchema.signup>) {
   const validatedFields = validationSchema.signup.safeParse(values)
   if (!validatedFields.success) {
@@ -18,11 +19,7 @@ export async function signup(values: z.infer<typeof validationSchema.signup>) {
   const { firstName, lastName, email, password } = validatedFields.data
   const hashedPassword = await bcrypt.hash(password, 10)
 
-  const existingUser = await db.user.findUnique({
-    where: {
-      email: email,
-    },
-  })
+  const existingUser = await getUserByCondition(email)
 
   if (existingUser) {
     throw new Error(
@@ -33,8 +30,7 @@ export async function signup(values: z.infer<typeof validationSchema.signup>) {
   if (!existingUser) {
     await db.user.create({
       data: {
-        firstName,
-        lastName,
+        name: firstName + ' ' + lastName,
         email,
         password: hashedPassword,
       },

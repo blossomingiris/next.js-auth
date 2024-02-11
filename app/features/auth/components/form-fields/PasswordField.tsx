@@ -10,15 +10,15 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from '@/components/ui/Form'
+import { FormMessage } from '@/components/ui/FormMessage'
 import { Input } from '@/components/ui/Input'
 import { RenderIf } from '@/components/ui/RenderIf'
 
 interface PasswordFieldProps<T extends FieldValues>
   extends UseControllerProps<T> {
-  switchIcon: boolean
-  setSwitchIcon: Dispatch<SetStateAction<boolean>>
+  switchPasswordIcon: boolean
+  setSwitchPasswordIcon: Dispatch<SetStateAction<boolean>>
   handlePasswordValidationChange?: (value: string) => void
   setIsPasswordComplexityVisible?: Dispatch<SetStateAction<boolean>>
 }
@@ -26,8 +26,8 @@ interface PasswordFieldProps<T extends FieldValues>
 export default function PasswordField<T extends FieldValues>({
   name,
   control,
-  setSwitchIcon,
-  switchIcon,
+  setSwitchPasswordIcon,
+  switchPasswordIcon,
   handlePasswordValidationChange,
   setIsPasswordComplexityVisible,
 }: PasswordFieldProps<T>) {
@@ -36,7 +36,7 @@ export default function PasswordField<T extends FieldValues>({
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     const enteredPassword = e.target.value
-    setSwitchIcon(enteredPassword.length > 0)
+    setSwitchPasswordIcon(enteredPassword.length > 0)
     handlePasswordValidationChange &&
       handlePasswordValidationChange(enteredPassword)
   }
@@ -75,11 +75,11 @@ export default function PasswordField<T extends FieldValues>({
                     setIsPasswordComplexityVisible(false)
                 }}
               />
-              <RenderIf isTrue={switchIcon}>
+              <RenderIf isTrue={switchPasswordIcon}>
                 <RenderIf isTrue={isPasswordVisible}>
                   <LuEye
                     className={cn(
-                      'cursor-pointer absolute right-[9px] text-muted-foreground top-[11px]',
+                      'cursor-pointer absolute right-[9px] text-muted-foreground top-[11px] bg-card',
                       {
                         'text-primary': isPasswordFocused,
                       },
@@ -91,7 +91,7 @@ export default function PasswordField<T extends FieldValues>({
                 </RenderIf>
                 <RenderIf isTrue={!isPasswordVisible}>
                   <LuEyeOff
-                    className={cn('cursor-pointer', iconClass, {
+                    className={cn('cursor-pointer bg-card', iconClass, {
                       'text-primary': isPasswordFocused,
                     })}
                     size={iconSize}
@@ -100,10 +100,10 @@ export default function PasswordField<T extends FieldValues>({
                   />
                 </RenderIf>
               </RenderIf>
-              <RenderIf isTrue={!switchIcon}>
+              <RenderIf isTrue={!switchPasswordIcon}>
                 <LuLock
                   className={cn(iconClass, {
-                    'text-primary': isPasswordFocused,
+                    'text-primary bg-card': isPasswordFocused,
                   })}
                   size={iconSize}
                   title="password"

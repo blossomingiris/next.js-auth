@@ -1,5 +1,6 @@
-import { cn } from '@/lib/utils'
 import * as React from 'react'
+
+import { cn } from '@/lib/utils'
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -22,7 +23,10 @@ const CardHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('flex flex-col space-y-1.5 p-8 sm:pt-10 sm:px-12', className)}
+    className={cn(
+      'flex flex-col space-y-1.5 px-5 py-8 sm:px-10 sm:py-10',
+      className,
+    )}
     {...props}
   />
 ))
@@ -66,7 +70,10 @@ const CardFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('flex items-center p-8 sm:px-12', className)}
+    className={cn(
+      'flex items-center px-5 pb-8 sm:px-10 sm:pb-8 pt-3',
+      className,
+    )}
     {...props}
   />
 ))

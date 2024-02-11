@@ -10,8 +10,8 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from '@/components/ui/Form'
+import { FormMessage } from '@/components/ui/FormMessage'
 import { Input } from '@/components/ui/Input'
 
 interface EmailFieldProps<T extends FieldValues> extends UseControllerProps<T> {
@@ -22,7 +22,7 @@ export default function EmailField<T extends FieldValues>({
   control,
   hasAutoFocus,
 }: EmailFieldProps<T>) {
-  const [isEmailFocused, setIsEmailFocused] = useState(false)
+  const [isEmailFocused, setIsEmailFocused] = useState(hasAutoFocus)
 
   return (
     <FormField
@@ -36,7 +36,7 @@ export default function EmailField<T extends FieldValues>({
               <Input
                 {...field}
                 type="email"
-                placeholder="e.g john.doe@example.com"
+                placeholder="e.g. jane.doe@example.com"
                 className="text-base"
                 onFocus={() => setIsEmailFocused(true)}
                 onBlur={() => setIsEmailFocused(false)}
@@ -44,7 +44,7 @@ export default function EmailField<T extends FieldValues>({
               />
               <LuMail
                 className={cn(
-                  'absolute right-[9px] text-muted-foreground top-[11px]',
+                  'absolute right-[9px] text-muted-foreground top-[11px] bg-card',
                   {
                     'text-primary': isEmailFocused,
                   },

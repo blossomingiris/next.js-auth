@@ -1,6 +1,7 @@
-import { animation, opacity } from '@/lib/animations'
 import { motion } from 'framer-motion'
 import { MdReportGmailerrorred } from 'react-icons/md'
+
+import { animation, opacity } from '@/lib/animations'
 
 type FormErrorProps = {
   message?: string
@@ -12,7 +13,7 @@ export const FormError = (props: FormErrorProps) => {
 
   return (
     <motion.div
-      className="bg-destructive/15 p-3 rounded-md flex items-center text-sm text-destructive gap-1"
+      className="bg-destructive/15 p-3 rounded-md flex items-center text-sm text-destructive gap-1 mb-6"
       {...animation(opacity)}
     >
       <MdReportGmailerrorred size={22} className="flex-shrink-0" />

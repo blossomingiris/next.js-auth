@@ -7,7 +7,7 @@ type BackButtonProps = {
   backButtonHref: string
 }
 
-export const BackButton = (props: BackButtonProps) => {
+export default function BackButton(props: BackButtonProps) {
   const { backButtonLabel, backButtonHref } = props
 
   return (

@@ -18,3 +18,14 @@ export const opacity = {
   },
   exit: { opacity: 0 },
 }
+
+export const validation = {
+  initial: { opacity: 0 },
+  onscreen: {
+    opacity: 1,
+    transition: { type: 'easy-in' },
+  },
+  exit: { opacity: 0 },
+}
+
+

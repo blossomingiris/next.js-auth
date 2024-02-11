@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${urbanist.className} bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#9feef6] to-[#0093d4] text-foreground`}
+        className={`${urbanist.className} bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#9feef6] to-[#A1C4FD] text-foreground`}
       >
         {children}
       </body>

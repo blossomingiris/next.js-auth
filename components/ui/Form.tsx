@@ -1,7 +1,7 @@
-import { cn } from '@/lib/utils'
+import * as React from 'react'
+
 import * as LabelPrimitive from '@radix-ui/react-label'
 import { Slot } from '@radix-ui/react-slot'
-import * as React from 'react'
 import {
   Controller,
   ControllerProps,
@@ -11,7 +11,9 @@ import {
   useFormContext,
 } from 'react-hook-form'
 
-import { Label } from './label'
+import { cn } from '@/lib/utils'
+
+import { Label } from './Label'
 
 const Form = FormProvider
 
@@ -78,7 +80,7 @@ const FormItem = React.forwardRef<
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn('space-y-2', className)} {...props} />
+      <div ref={ref} className={cn('space-y-1', className)} {...props} />
     </FormItemContext.Provider>
   )
 })
@@ -135,30 +137,6 @@ const FormDescription = React.forwardRef<
 })
 FormDescription.displayName = 'FormDescription'
 
-const FormMessage = React.forwardRef<
-  HTMLParagraphElement,
-  React.HTMLAttributes<HTMLParagraphElement>
->(({ className, children, ...props }, ref) => {
-  const { error, formMessageId } = useFormField()
-  const body = error ? String(error?.message) : children
-
-  if (!body) {
-    return null
-  }
-
-  return (
-    <p
-      ref={ref}
-      id={formMessageId}
-      className={cn('text-[0.8rem] font-medium text-destructive', className)}
-      {...props}
-    >
-      {body}
-    </p>
-  )
-})
-FormMessage.displayName = 'FormMessage'
-
 export {
   useFormField,
   Form,
@@ -166,6 +144,5 @@ export {
   FormLabel,
   FormControl,
   FormDescription,
-  FormMessage,
   FormField,
 }
