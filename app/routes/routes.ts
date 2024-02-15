@@ -3,6 +3,7 @@ export const routePaths = {
   login: '/auth/login',
   createAccount: '/auth/signup',
   forgotPassword: '/auth/forgot-password',
+  authVerification: '/auth/new-verification',
   authError: '/auth/error',
   settings: 'settings',
 }
@@ -11,7 +12,10 @@ export const routePaths = {
  * @type — {string[]}
  */
 
-export const publicRoutes: string[] = [routePaths.home]
+export const publicRoutes: string[] = [
+  routePaths.home,
+  routePaths.authVerification,
+]
 
 /**
  * An array of routes that are used for authentication.

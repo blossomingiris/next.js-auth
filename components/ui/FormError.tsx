@@ -13,7 +13,7 @@ export const FormError = (props: FormErrorProps) => {
 
   return (
     <motion.div
-      className="bg-destructive/15 p-3 rounded-md flex items-center text-sm text-destructive gap-1 mb-6"
+      className="bg-destructive/15 p-3 rounded-md flex items-center text-sm text-destructive gap-2 mb-6"
       {...animation(opacity)}
     >
       <MdReportGmailerrorred size={22} className="flex-shrink-0" />

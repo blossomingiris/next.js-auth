@@ -9,8 +9,8 @@ const urbanist = Urbanist({
 })
 
 export const metadata: Metadata = {
-  title: 'Authentication',
-  description: 'Authentication with Next.js',
+  title: 'XR Auth',
+  description: 'Authentication and authorization',
 }
 
 export default function RootLayout({

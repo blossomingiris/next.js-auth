@@ -12,10 +12,10 @@ const usePasswordValidation = () => {
   const [validationCriteria, setValidationCriteria] = useState<Password[]>([])
 
   const passwordComplexity = [
-    { criteria: 'one lowercase letter', regex: /[a-z]/ },
-    { criteria: 'one uppercase letter', regex: /[A-Z]/ },
-    { criteria: 'one number', regex: /\d/ },
-    { criteria: 'one special character', regex: /[!@#$%^&*(),.?":{}|<>]/ },
+    { criteria: 'One lowercase letter', regex: /[a-z]/ },
+    { criteria: 'One uppercase letter', regex: /[A-Z]/ },
+    { criteria: 'One number', regex: /\d/ },
+    { criteria: 'One special character', regex: /[!@#$%^&*(),.?":{}|<>]/ },
     { criteria: '8 characters long', regex: /.{8,}/ },
   ]
 

@@ -4,6 +4,8 @@ import bcrypt from 'bcryptjs'
 import * as z from 'zod'
 
 import db from '@/lib/db'
+import { sendVerificationEmail } from '@/lib/mail'
+import { generateVerificationToken } from '@/lib/tokens'
 import { validationSchema } from '@/lib/validationSchema'
 
 import { getUserByCondition } from '@/helpers/getUserByCondition'
@@ -35,6 +37,17 @@ export async function signup(values: z.infer<typeof validationSchema.signup>) {
         password: hashedPassword,
       },
     })
-    return { success: 'Your account has been created.' }
+
+    // send verification email
+    const verificationToken = await generateVerificationToken(email)
+    await sendVerificationEmail(
+      verificationToken.email,
+      verificationToken.token,
+      firstName,
+    )
+    return {
+      success:
+        'Account verification email has been sent to your email address.',
+    }
   }
 }

@@ -21,6 +21,7 @@ export const {
   signOut,
 } = NextAuth({
   adapter: PrismaAdapter(db),
+  //custom sign-in and error pages
   pages: {
     signIn: '/auth/login',
     error: '/auth/error',
@@ -34,6 +35,17 @@ export const {
     },
   },
   callbacks: {
+    async signIn({ user, account }) {
+      // Allow user sign in with OAuth without email verification
+      if (account?.provider !== 'credentials') return true
+      const existingUser = await getUserByCondition(user.id!)
+      // Allow user sign in with email verification else block log in
+      if (existingUser && existingUser.emailVerified) {
+        return true
+      } else {
+        return false
+      }
+    },
     async session({ session, token, user }) {
       return {
         ...session,

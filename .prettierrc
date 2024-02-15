@@ -14,11 +14,11 @@
     "<THIRD_PARTY_MODULES>",
 		"^@/actions/(.*)$",
     "^@/app/(.*)$",
+		"^@/auth",
     "^@/lib/(.*)$",
 		"^@/helpers/(.*)$",
     "^@/components/ui/(.*)$",
     "^@/components/(.*)$",
-		"^@/auth",
 		"^@/types/(.*)$",
 		"^\\.",
     "^\\.."

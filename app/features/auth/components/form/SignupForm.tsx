@@ -18,12 +18,12 @@ import { Form } from '@/components/ui/Form'
 import { FormError } from '@/components/ui/FormError'
 import { FormSuccess } from '@/components/ui/FormSuccess'
 
-import usePasswordValidation from '../hooks/usePasswordValidation'
-import PasswordCriteriaList from './PasswordCriteriaList'
-import EmailField from './form-fields/EmailField'
-import NameField from './form-fields/NameField'
-import PasswordField from './form-fields/PasswordField'
-import FormSubmitButton from './ui/FormSubmitButton'
+import usePasswordValidation from '../../hooks/usePasswordValidation'
+import EmailField from '../form-fields/EmailField'
+import NameField from '../form-fields/NameField'
+import PasswordField from '../form-fields/PasswordField'
+import FormSubmitButton from '../ui/FormSubmitButton'
+import PasswordCriteriaList from '../ui/PasswordCriteriaList'
 
 export function SignupForm() {
   const [switchPasswordIcon, setSwitchPasswordIcon] = useState(false)
@@ -97,6 +97,7 @@ export function SignupForm() {
       headerDescription="Create an account"
       backButtonLabel="Already have an account?"
       backButtonHref={routePaths.login}
+      backButtonStyle="link"
       hasSocialMedia
     >
       <Form {...form}>
