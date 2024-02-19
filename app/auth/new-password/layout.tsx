@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'XR Auth | Create an Account',
+  title: 'XR Auth | Create new password',
 }
 
-export default function SignUpLayout({
+export default function NewPasswordLayout({
   children,
 }: Readonly<{
   children: React.ReactNode

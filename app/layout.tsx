@@ -10,7 +10,7 @@ const urbanist = Urbanist({
 
 export const metadata: Metadata = {
   title: 'XR Auth',
-  description: 'Authentication and authorization',
+  description: 'Secure authentication and authorization application',
 }
 
 export default function RootLayout({

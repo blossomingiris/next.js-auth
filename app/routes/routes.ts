@@ -5,6 +5,8 @@ export const routePaths = {
   forgotPassword: '/auth/forgot-password',
   authVerification: '/auth/new-verification',
   authError: '/auth/error',
+  resetPassword: '/auth/reset-password',
+  newPassword: '/auth/new-password',
   settings: 'settings',
 }
 /**
@@ -26,6 +28,8 @@ export const authRoutes: string[] = [
   routePaths.login,
   routePaths.createAccount,
   routePaths.authError,
+  routePaths.resetPassword,
+  routePaths.newPassword,
 ]
 
 /**

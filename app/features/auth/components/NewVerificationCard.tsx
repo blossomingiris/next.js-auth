@@ -53,7 +53,6 @@ export default function NewVerificationCard() {
             backButtonLabel="Back to Sign up"
             backButtonStyle="default"
             backButtonHref={routePaths.createAccount}
-            hasSocialMedia={false}
           >
             <div className="flex items-center w-full justify-center">
               <p className="animate-pulse">Confirming your email address...</p>

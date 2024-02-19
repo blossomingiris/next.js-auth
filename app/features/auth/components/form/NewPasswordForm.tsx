@@ -2,12 +2,14 @@
 
 import { useEffect, useState, useTransition } from 'react'
 
+import { useSearchParams } from 'next/navigation'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AnimatePresence } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
-import { signup } from '@/actions/signup'
+import { newPassword } from '@/actions/new-password'
 
 import CardWrapper from '@/app/features/auth/components/ui/CardWrapper'
 import { routePaths } from '@/app/routes/routes'
@@ -19,17 +21,17 @@ import { FormError } from '@/components/ui/FormError'
 import { FormSuccess } from '@/components/ui/FormSuccess'
 
 import usePasswordValidation from '../../hooks/usePasswordValidation'
-import EmailField from '../form-fields/EmailField'
-import NameField from '../form-fields/NameField'
 import PasswordField from '../form-fields/PasswordField'
 import FormSubmitButton from '../ui/FormSubmitButton'
 import PasswordCriteriaList from '../ui/PasswordCriteriaList'
 
-export function SignupForm() {
+export default function NewPasswordForm() {
   const [isMessageVisible, setMessageVisible] = useState(false)
   const [isPasswordComplexityVisible, setIsPasswordComplexityVisible] =
     useState(true)
   const [switchPasswordIcon, setSwitchPasswordIcon] = useState(false)
+  const [switchConfirmPasswordIcon, setSwitchConfirmPasswordIcon] =
+    useState(false)
   const [isPending, startTransition] = useTransition()
   const [hasError, setHasError] = useState<string | undefined>('')
   const [hasSuccess, setHasSuccess] = useState<string | undefined>('')
@@ -39,33 +41,34 @@ export function SignupForm() {
     validationCriteria,
     handlePasswordValidationChange,
   } = usePasswordValidation()
+  const searchParams = useSearchParams()
+  const token = searchParams.get('token')
 
-  const form = useForm<z.infer<typeof validation.signup>>({
-    resolver: zodResolver(validation.signup),
+  const form = useForm<z.infer<typeof validation.newPassword>>({
+    resolver: zodResolver(validation.newPassword),
     defaultValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
       password: '',
+      confirm_password: '',
     },
   })
 
-  const onFormSubmit = (values: z.infer<typeof validation.signup>) => {
+  const onFormSubmit = (values: z.infer<typeof validation.newPassword>) => {
     if (!isValid) {
       setIsPasswordComplexityVisible(true)
     } else {
       setHasError('')
       setHasSuccess('')
       startTransition(() => {
-        signup(values).then(data => {
+        newPassword(values, token).then(data => {
           if (data && data.success) setHasSuccess(data.success)
-          if (data && data.error)
-            setHasError(data.error || 'An expected error occurred')
+          if (data && data.error) setHasError(data.error)
         })
         setMessageVisible(true)
         form.reset()
       })
     }
+    setSwitchPasswordIcon(false)
+    setSwitchConfirmPasswordIcon(false)
     showErrorOrSuccessMessage()
   }
 
@@ -89,49 +92,37 @@ export function SignupForm() {
 
   return (
     <CardWrapper
-      headerTitle="Sign Up"
-      headerDescription="Create an Account"
-      backButtonLabel="Already have an account?"
+      headerTitle="Password Reset"
+      headerDescription="Create a new password"
+      backButtonLabel="Back to Login"
       backButtonHref={routePaths.login}
       backButtonStyle="link"
-      hasSocialMedia
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onFormSubmit)}>
           <div className="space-y-4 mb-7">
-            <NameField
-              form={form}
-              name="firstName"
-              placeholder="Enter your first name"
-              label="First name"
-              hasAutoFocus
+            <PasswordField
+              name="password"
+              handlePasswordValidationChange={handlePasswordValidationChange}
+              setIsPasswordComplexityVisible={setIsPasswordComplexityVisible}
+              switchPasswordIcon={switchPasswordIcon}
+              setSwitchPasswordIcon={setSwitchPasswordIcon}
             />
-            <NameField
-              form={form}
-              name="lastName"
-              placeholder="Enter you last name"
-              label="Last name"
+            <AnimatePresence>
+              {!isValid &&
+                password &&
+                isPasswordComplexityVisible &&
+                dirtyFields.password && (
+                  <PasswordCriteriaList
+                    validationCriteria={validationCriteria}
+                  />
+                )}
+            </AnimatePresence>
+            <PasswordField
+              name="confirm_password"
+              switchConfirmPasswordIcon={switchConfirmPasswordIcon}
+              setSwitchConfirmPasswordIcon={setSwitchConfirmPasswordIcon}
             />
-            <EmailField name="email" />
-            <div>
-              <PasswordField
-                name="password"
-                handlePasswordValidationChange={handlePasswordValidationChange}
-                setIsPasswordComplexityVisible={setIsPasswordComplexityVisible}
-                switchPasswordIcon={switchPasswordIcon}
-                setSwitchPasswordIcon={setSwitchPasswordIcon}
-              />
-              <AnimatePresence>
-                {!isValid &&
-                  password &&
-                  isPasswordComplexityVisible &&
-                  dirtyFields.password && (
-                    <PasswordCriteriaList
-                      validationCriteria={validationCriteria}
-                    />
-                  )}
-              </AnimatePresence>
-            </div>
           </div>
           <AnimatePresence>
             {isMessageVisible && <FormError message={hasError} />}
@@ -139,7 +130,7 @@ export function SignupForm() {
           <AnimatePresence>
             {isMessageVisible && <FormSuccess message={hasSuccess} />}
           </AnimatePresence>
-          <FormSubmitButton label="Sign Up" hasSpinner={isPending} />
+          <FormSubmitButton label="Submit" hasSpinner={isPending} />
         </form>
       </Form>
     </CardWrapper>

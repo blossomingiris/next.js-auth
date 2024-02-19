@@ -1,17 +1,19 @@
-import React from 'react'
-
 type EmailTemplate = {
-  firstName: string
-  confirmationLink: string
+  username: string
+  url: string
+  description: string
 }
 
 export default function EmailTemplate(props: EmailTemplate) {
-  const { firstName, confirmationLink } = props
+  const { username, url, description } = props
   return (
-    <div>
-      <h1>Hello, {firstName}</h1>
-      <p>Verify your email address by clicking </p>
-      <a href={confirmationLink}>here</a>
-    </div>
+    <>
+      <p>Hello, {username}!</p>
+      <div className="flex gap-1">
+        <p>{description}</p>
+        <a href={url}>Click me</a>
+      </div>
+      <p>XR Auth</p>
+    </>
   )
 }

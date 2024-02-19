@@ -17,30 +17,38 @@ import { RenderIf } from '@/components/ui/RenderIf'
 
 interface PasswordFieldProps<T extends FieldValues>
   extends UseControllerProps<T> {
-  switchPasswordIcon: boolean
-  setSwitchPasswordIcon: Dispatch<SetStateAction<boolean>>
+  switchPasswordIcon?: boolean
+  switchConfirmPasswordIcon?: boolean
   handlePasswordValidationChange?: (value: string) => void
   setIsPasswordComplexityVisible?: Dispatch<SetStateAction<boolean>>
+  setSwitchPasswordIcon?: Dispatch<SetStateAction<boolean>>
+  setSwitchConfirmPasswordIcon?: Dispatch<SetStateAction<boolean>>
 }
 
 export default function PasswordField<T extends FieldValues>({
   name,
   control,
-  setSwitchPasswordIcon,
-  switchPasswordIcon,
   handlePasswordValidationChange,
   setIsPasswordComplexityVisible,
+  switchPasswordIcon,
+  setSwitchPasswordIcon,
+  setSwitchConfirmPasswordIcon,
+  switchConfirmPasswordIcon,
 }: PasswordFieldProps<T>) {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
   const [isPasswordFocused, setIsPasswordFocused] = useState(false)
 
-  const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const enteredPassword = e.target.value
-    setSwitchPasswordIcon(enteredPassword.length > 0)
+    if (name === 'password' && setSwitchPasswordIcon) {
+      setSwitchPasswordIcon(enteredPassword.length > 0)
+    }
+    if (name === 'confirmPassword' && setSwitchConfirmPasswordIcon) {
+      setSwitchConfirmPasswordIcon(enteredPassword.length > 0)
+    }
     handlePasswordValidationChange &&
       handlePasswordValidationChange(enteredPassword)
   }
-
   const handlePasswordVisibilityClick = () => {
     setIsPasswordVisible(prev => !prev)
   }
@@ -54,16 +62,23 @@ export default function PasswordField<T extends FieldValues>({
       name={name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className="text-base font-medium">Password</FormLabel>
+          <FormLabel className="text-base font-medium">
+            {name === 'password' ? 'Password' : 'Confirm password'}
+          </FormLabel>
           <FormControl>
             <div className="relative">
               <Input
                 {...field}
+                name={name}
                 type={isPasswordVisible ? 'text' : 'password'}
-                placeholder="Enter your password"
+                placeholder={
+                  name === 'password'
+                    ? 'Enter you password'
+                    : 'Confirm your password'
+                }
                 className="text-base w-full"
                 onChange={e => {
-                  handlePasswordChange(e)
+                  handleInputChange(e)
                   field.onChange(e)
                   setIsPasswordComplexityVisible &&
                     setIsPasswordComplexityVisible(true)
@@ -75,9 +90,11 @@ export default function PasswordField<T extends FieldValues>({
                     setIsPasswordComplexityVisible(false)
                 }}
               />
-              <RenderIf isTrue={switchPasswordIcon}>
+              <RenderIf
+                isTrue={switchPasswordIcon! || switchConfirmPasswordIcon!}
+              >
                 <RenderIf isTrue={isPasswordVisible}>
-                  <LuEye
+                  <LuEyeOff
                     className={cn(
                       'cursor-pointer absolute right-[9px] text-muted-foreground top-[11px] bg-card',
                       {
@@ -85,22 +102,24 @@ export default function PasswordField<T extends FieldValues>({
                       },
                     )}
                     size={22}
-                    title="Toggle password visibility"
+                    title="Hide password"
                     onClick={handlePasswordVisibilityClick}
                   />
                 </RenderIf>
                 <RenderIf isTrue={!isPasswordVisible}>
-                  <LuEyeOff
+                  <LuEye
                     className={cn('cursor-pointer bg-card', iconClass, {
                       'text-primary': isPasswordFocused,
                     })}
                     size={iconSize}
-                    title="Toggle password visibility"
+                    title="Show password"
                     onClick={handlePasswordVisibilityClick}
                   />
                 </RenderIf>
               </RenderIf>
-              <RenderIf isTrue={!switchPasswordIcon}>
+              <RenderIf
+                isTrue={!switchPasswordIcon || switchConfirmPasswordIcon!}
+              >
                 <LuLock
                   className={cn(iconClass, {
                     'text-primary bg-card': isPasswordFocused,

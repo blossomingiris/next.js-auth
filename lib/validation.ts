@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const validationSchema = {
+export const validation = {
   login: z.object({
     email: z
       .string()
@@ -19,4 +19,23 @@ export const validationSchema = {
       .email('Invalid email format: e.g. jane.doe@example.com'),
     password: z.string().trim().min(1, { message: 'Password is required' }),
   }),
+  resetPassword: z.object({
+    email: z
+      .string()
+      .trim()
+      .min(1, { message: 'Email is required' })
+      .email('Invalid email format: e.g. jane.doe@example.com'),
+  }),
+  newPassword: z
+    .object({
+      password: z.string().trim().min(1, { message: 'Password is required' }),
+      confirm_password: z
+        .string()
+        .trim()
+        .min(1, { message: 'Password confirmation is required' }),
+    })
+    .refine(data => data.password === data.confirm_password, {
+      message: "Passwords don't match",
+      path: ['confirm_password'],
+    }),
 }

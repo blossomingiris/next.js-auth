@@ -15,7 +15,7 @@ type CardWrapperProps = {
   backButtonLabel: string
   backButtonHref: string
   backButtonStyle: 'default' | 'link'
-  hasSocialMedia: boolean
+  hasSocialMedia?: boolean
 }
 
 export default function CardWrapper(props: CardWrapperProps) {
@@ -25,7 +25,7 @@ export default function CardWrapper(props: CardWrapperProps) {
     headerDescription,
     backButtonLabel,
     backButtonHref,
-    hasSocialMedia,
+    hasSocialMedia = false,
     backButtonStyle,
   } = props
 

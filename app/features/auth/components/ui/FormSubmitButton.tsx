@@ -16,7 +16,7 @@ export default function FormSubmitButton(props: FormSubmitButtonProps) {
     <Button
       className="w-full font-semibold mt-3 text-lg active:scale-95 transition-all duration-200"
       size="lg"
-      disabled={hasSpinner}
+      aria-disabled={hasSpinner}
     >
       {label}
       {hasSpinner && <LuLoader2 size={22} className="ml-2 animate-spin" />}

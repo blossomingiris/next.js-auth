@@ -21,3 +21,25 @@ export const getVerificationTokenByToken = async (token: string) => {
     return null
   }
 }
+
+export const getResetPasswordTokenByToken = async (token: string) => {
+  try {
+    const passwordResetToken = await db.passwordResetToken.findUnique({
+      where: { token },
+    })
+    return passwordResetToken
+  } catch {
+    return null
+  }
+}
+
+export const getResetPasswordTokenByEmail = async (email: string) => {
+  try {
+    const passwordResetToken = await db.passwordResetToken.findFirst({
+      where: { email },
+    })
+    return passwordResetToken
+  } catch {
+    return null
+  }
+}

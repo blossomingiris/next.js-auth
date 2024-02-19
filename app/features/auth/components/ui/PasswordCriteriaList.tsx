@@ -9,7 +9,7 @@ type Password = {
   isValid: boolean
 }
 
-type PasswordCriteriaListProps = {
+export type PasswordCriteriaListProps = {
   validationCriteria: Password[]
 }
 

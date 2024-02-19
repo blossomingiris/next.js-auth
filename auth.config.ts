@@ -5,7 +5,7 @@ import GitHub from 'next-auth/providers/github'
 import Google from 'next-auth/providers/google'
 
 import { getUserByCondition } from './helpers/getUserByCondition'
-import { validationSchema } from './lib/validationSchema'
+import { validation } from './lib/validation'
 
 export default {
   providers: [
@@ -19,7 +19,7 @@ export default {
     }),
     Credentials({
       async authorize(credentials) {
-        const validatedFields = validationSchema.login.safeParse(credentials)
+        const validatedFields = validation.login.safeParse(credentials)
         if (validatedFields.success) {
           const { email, password } = validatedFields.data
           const user = await getUserByCondition(email)

@@ -6,13 +6,13 @@ import * as z from 'zod'
 import db from '@/lib/db'
 import { sendVerificationEmail } from '@/lib/mail'
 import { generateVerificationToken } from '@/lib/tokens'
-import { validationSchema } from '@/lib/validationSchema'
+import { validation } from '@/lib/validation'
 
 import { getUserByCondition } from '@/helpers/getUserByCondition'
 
 //?progressive enhancement
-export async function signup(values: z.infer<typeof validationSchema.signup>) {
-  const validatedFields = validationSchema.signup.safeParse(values)
+export async function signup(values: z.infer<typeof validation.signup>) {
+  const validatedFields = validation.signup.safeParse(values)
   if (!validatedFields.success) {
     return {
       error: 'Invalid fields',
@@ -24,9 +24,10 @@ export async function signup(values: z.infer<typeof validationSchema.signup>) {
   const existingUser = await getUserByCondition(email)
 
   if (existingUser) {
-    throw new Error(
-      'User with this email already exists. Please use a different email address.',
-    )
+    return {
+      error:
+        'User with this email already exists. Please use a different email address.',
+    }
   }
 
   if (!existingUser) {
@@ -43,7 +44,7 @@ export async function signup(values: z.infer<typeof validationSchema.signup>) {
     await sendVerificationEmail(
       verificationToken.email,
       verificationToken.token,
-      firstName,
+      firstName + lastName,
     )
     return {
       success:

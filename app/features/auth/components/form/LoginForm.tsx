@@ -2,6 +2,7 @@
 
 import { useMemo, useState, useTransition } from 'react'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 
@@ -15,8 +16,9 @@ import { login } from '@/actions/login'
 import CardWrapper from '@/app/features/auth/components/ui/CardWrapper'
 import { routePaths } from '@/app/routes/routes'
 
-import { validationSchema } from '@/lib/validationSchema'
+import { validation } from '@/lib/validation'
 
+import { Button } from '@/components/ui/Button'
 import { Form } from '@/components/ui/Form'
 import { FormError } from '@/components/ui/FormError'
 import { FormSuccess } from '@/components/ui/FormSuccess'
@@ -29,31 +31,26 @@ export default function LoginForm() {
   const [isPending, startTransition] = useTransition()
   const [error, setError] = useState<string | undefined>('')
   const [success, setSuccess] = useState<string | undefined>('')
-  const [switchPasswordIcon, setSwitchPasswordIcon] = useState(false)
   const router = useRouter()
+  const [switchPasswordIcon, setSwitchPasswordIcon] = useState(false)
   const searchParams = useSearchParams()
   const errorUrl =
     searchParams.get('error') === 'OAuthAccountNotLinked'
       ? `This account is already associated with another provider. Please continue using the linked provider's credentials.`
       : ''
 
-  const form = useForm<z.infer<typeof validationSchema.login>>({
-    resolver: zodResolver(validationSchema.login),
+  const form = useForm<z.infer<typeof validation.login>>({
+    resolver: zodResolver(validation.login),
     defaultValues: {
       email: '',
       password: '',
     },
   })
 
-  const onFormSubmit = (values: z.infer<typeof validationSchema.login>) => {
+  const onFormSubmit = (values: z.infer<typeof validation.login>) => {
     startTransition(() => {
       login(values).then(data => {
-        if (data?.error) {
-          setError(data?.error)
-        }
-        // if (data?.success) {
-        //   setSuccess(data.success)
-        // }
+        if (data && data.error) setError(data.error)
       })
     })
     form.reset()
@@ -92,10 +89,15 @@ export default function LoginForm() {
           <div className="space-y-4 mb-7">
             <EmailField name="email" hasAutoFocus />
             <PasswordField
+              name="password"
               switchPasswordIcon={switchPasswordIcon}
               setSwitchPasswordIcon={setSwitchPasswordIcon}
-              name="password"
             />
+          </div>
+          <div className="w-full flex justify-end">
+            <Button variant="link" className="px-0 text-muted-foreground">
+              <Link href={routePaths.resetPassword}>Forgot your password?</Link>
+            </Button>
           </div>
           <AnimatePresence>
             {error && <FormError message={error} />}

@@ -8,13 +8,13 @@ import { DEFAULT_LOGIN_REDIRECT_URL } from '@/app/routes/routes'
 import { signIn } from '@/auth'
 
 // import { generateVerificationToken } from '@/lib/tokens'
-import { validationSchema } from '@/lib/validationSchema'
+import { validation } from '@/lib/validation'
 
 import { getUserByCondition } from '@/helpers/getUserByCondition'
 
 //?progressive enhancement
-export async function login(values: z.infer<typeof validationSchema.login>) {
-  const validatedFields = validationSchema.login.safeParse(values)
+export async function login(values: z.infer<typeof validation.login>) {
+  const validatedFields = validation.login.safeParse(values)
   if (!validatedFields.success) {
     return {
       error: 'Invalid fields',
@@ -32,7 +32,7 @@ export async function login(values: z.infer<typeof validationSchema.login>) {
     // await generateVerificationToken(existingUser.email)
     return {
       error:
-        'Please check your email inbox and proceed with verifying your account.',
+        'Your are account is not verified. Please check your email inbox and proceed with verification instructions.',
     }
   }
 
