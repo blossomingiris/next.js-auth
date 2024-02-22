@@ -56,8 +56,6 @@ export default function NewPasswordForm() {
     if (!isValid) {
       setIsPasswordComplexityVisible(true)
     } else {
-      setHasError('')
-      setHasSuccess('')
       startTransition(() => {
         newPassword(values, token).then(data => {
           if (data && data.success) setHasSuccess(data.success)
@@ -120,6 +118,7 @@ export default function NewPasswordForm() {
             </AnimatePresence>
             <PasswordField
               name="confirm_password"
+              handlePasswordValidationChange={handlePasswordValidationChange}
               switchConfirmPasswordIcon={switchConfirmPasswordIcon}
               setSwitchConfirmPasswordIcon={setSwitchConfirmPasswordIcon}
             />

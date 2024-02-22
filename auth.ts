@@ -5,8 +5,10 @@ import NextAuth from 'next-auth'
 
 import authConfig from '@/auth.config'
 
+import db from '@/lib/db'
+
+import { getTwoFactorConfirmationByUserId } from './helpers/getTwoFactorConfirmationByUserId'
 import { getUserByCondition } from './helpers/getUserByCondition'
-import db from './lib/db'
 
 declare module 'next-auth' {
   interface User {
@@ -39,7 +41,22 @@ export const {
       // Allow user sign in with OAuth without email verification
       if (account?.provider !== 'credentials') return true
       const existingUser = await getUserByCondition(user.id!)
-      // Allow user sign in with email verification else block log in
+      // Allow user sign in with 2factor else block log in
+      if (existingUser && existingUser.isTwoFactorEnabled) {
+        const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
+          existingUser.id,
+        )
+        if (!twoFactorConfirmation) {
+          return false
+        }
+        if (twoFactorConfirmation) {
+          await db.twoFactorToken.delete({
+            where: { id: twoFactorConfirmation.id },
+          })
+        }
+        return true
+      }
+      // Allow user sign in with verified email else block log in
       if (existingUser && existingUser.emailVerified) {
         return true
       } else {

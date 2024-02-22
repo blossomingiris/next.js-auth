@@ -29,9 +29,11 @@ export async function newVerification(token: string) {
   })
 
   //remove old verification token from db
-  await db.verificationToken.delete({
-    where: { id: existingUser.id },
-  })
+  // if (existingToken) {
+  //   await db.verificationToken.delete({
+  //     where: { id: existingUser.id },
+  //   })
+  // }
 
   return {
     success: 'Your account has been verified!',

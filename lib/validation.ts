@@ -8,6 +8,7 @@ export const validation = {
       .min(1, { message: 'Email is required' })
       .email('Invalid email format: e.g. jane.doe@example.com'),
     password: z.string().trim().min(1, { message: 'Password is required' }),
+    code: z.optional(z.string().trim()),
   }),
   signup: z.object({
     firstName: z.string().trim().min(1, { message: 'First name is required' }),

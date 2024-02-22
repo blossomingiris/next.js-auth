@@ -5,9 +5,9 @@ import * as z from 'zod'
 
 import db from '@/lib/db'
 import { sendVerificationEmail } from '@/lib/mail'
-import { generateVerificationToken } from '@/lib/tokens'
 import { validation } from '@/lib/validation'
 
+import { generateVerificationToken } from '@/helpers/generateToken'
 import { getUserByCondition } from '@/helpers/getUserByCondition'
 
 //?progressive enhancement

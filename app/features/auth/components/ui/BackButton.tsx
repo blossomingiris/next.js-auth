@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import { cn } from '@/lib/utils'
+
 import { Button } from '@/components/ui/Button'
 
 type BackButtonProps = {
@@ -13,7 +15,9 @@ export default function BackButton(props: BackButtonProps) {
 
   return (
     <Button
-      className="w-full"
+      className={cn('w-full', {
+        'justify-end': backButtonLabel === 'Forgot your password?',
+      })}
       asChild
       type="button"
       size="lg"

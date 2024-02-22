@@ -54,8 +54,6 @@ export function SignupForm() {
     if (!isValid) {
       setIsPasswordComplexityVisible(true)
     } else {
-      setHasError('')
-      setHasSuccess('')
       startTransition(() => {
         signup(values).then(data => {
           if (data && data.success) setHasSuccess(data.success)
@@ -89,8 +87,8 @@ export function SignupForm() {
 
   return (
     <CardWrapper
-      headerTitle="Sign Up"
-      headerDescription="Create an Account"
+      headerTitle="Create an Account"
+      headerDescription="Get started"
       backButtonLabel="Already have an account?"
       backButtonHref={routePaths.login}
       backButtonStyle="link"
@@ -139,7 +137,7 @@ export function SignupForm() {
           <AnimatePresence>
             {isMessageVisible && <FormSuccess message={hasSuccess} />}
           </AnimatePresence>
-          <FormSubmitButton label="Sign Up" hasSpinner={isPending} />
+          <FormSubmitButton label="Create Account" hasSpinner={isPending} />
         </form>
       </Form>
     </CardWrapper>

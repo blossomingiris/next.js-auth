@@ -7,9 +7,10 @@ import { DEFAULT_LOGIN_REDIRECT_URL } from '@/app/routes/routes'
 
 import { signIn } from '@/auth'
 
-// import { generateVerificationToken } from '@/lib/tokens'
+import { sendTwoFactorVerificationEmail } from '@/lib/mail'
 import { validation } from '@/lib/validation'
 
+import { generateTwoFactorToken } from '@/helpers/generateToken'
 import { getUserByCondition } from '@/helpers/getUserByCondition'
 
 //?progressive enhancement
@@ -25,15 +26,24 @@ export async function login(values: z.infer<typeof validation.login>) {
   const existingUser = await getUserByCondition(email)
 
   if (!existingUser || !existingUser.password || !existingUser.password) {
-    return { error: 'Account with this email does not exist.' }
+    return { error: 'Account with this credentials does not exist.' }
   }
 
   if (!existingUser.emailVerified) {
-    // await generateVerificationToken(existingUser.email)
     return {
       error:
         'Your are account is not verified. Please check your email inbox and proceed with verification instructions.',
     }
+  }
+
+  if (existingUser.isTwoFactorEnabled && existingUser.email) {
+    const twoFactorToken = await generateTwoFactorToken(existingUser.email)
+    await sendTwoFactorVerificationEmail(
+      twoFactorToken.email,
+      twoFactorToken.token,
+      existingUser.name,
+    )
+    return { twoFactor: true }
   }
 
   try {

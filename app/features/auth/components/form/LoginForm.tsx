@@ -2,7 +2,6 @@
 
 import { useMemo, useState, useTransition } from 'react'
 
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 
@@ -18,13 +17,14 @@ import { routePaths } from '@/app/routes/routes'
 
 import { validation } from '@/lib/validation'
 
-import { Button } from '@/components/ui/Button'
 import { Form } from '@/components/ui/Form'
 import { FormError } from '@/components/ui/FormError'
 import { FormSuccess } from '@/components/ui/FormSuccess'
+import { RenderIf } from '@/components/ui/RenderIf'
 
 import EmailField from '../form-fields/EmailField'
 import PasswordField from '../form-fields/PasswordField'
+import BackButton from '../ui/BackButton'
 import FormSubmitButton from '../ui/FormSubmitButton'
 
 export default function LoginForm() {
@@ -33,6 +33,7 @@ export default function LoginForm() {
   const [success, setSuccess] = useState<string | undefined>('')
   const router = useRouter()
   const [switchPasswordIcon, setSwitchPasswordIcon] = useState(false)
+  const [showTwoFactorInput, setShowTwoFactorInput] = useState(false)
   const searchParams = useSearchParams()
   const errorUrl =
     searchParams.get('error') === 'OAuthAccountNotLinked'
@@ -44,16 +45,24 @@ export default function LoginForm() {
     defaultValues: {
       email: '',
       password: '',
+      code: '',
     },
   })
 
   const onFormSubmit = (values: z.infer<typeof validation.login>) => {
     startTransition(() => {
-      login(values).then(data => {
-        if (data && data.error) setError(data.error)
-      })
+      login(values)
+        .then(data => {
+          if (data && data.error) {
+            setError(data.error)
+            form.reset()
+          }
+          if (data && data.twoFactor) {
+            setShowTwoFactorInput(true)
+          }
+        })
+        .catch(() => setError('Something went wrong'))
     })
-    form.reset()
     setSwitchPasswordIcon(false)
     setError('')
     setSuccess('')
@@ -87,18 +96,20 @@ export default function LoginForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onFormSubmit)}>
           <div className="space-y-4 mb-7">
-            <EmailField name="email" hasAutoFocus />
-            <PasswordField
-              name="password"
-              switchPasswordIcon={switchPasswordIcon}
-              setSwitchPasswordIcon={setSwitchPasswordIcon}
-            />
+            <RenderIf isTrue={!showTwoFactorInput}>
+              <EmailField name="email" hasAutoFocus />
+              <PasswordField
+                name="password"
+                switchPasswordIcon={switchPasswordIcon}
+                setSwitchPasswordIcon={setSwitchPasswordIcon}
+              />
+            </RenderIf>
           </div>
-          <div className="w-full flex justify-end">
-            <Button variant="link" className="px-0 text-muted-foreground">
-              <Link href={routePaths.resetPassword}>Forgot your password?</Link>
-            </Button>
-          </div>
+          <BackButton
+            backButtonLabel="Forgot your password?"
+            backButtonHref={routePaths.resetPassword}
+            backButtonStyle="link"
+          />
           <AnimatePresence>
             {error && <FormError message={error} />}
           </AnimatePresence>

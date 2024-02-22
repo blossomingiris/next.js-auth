@@ -73,7 +73,7 @@ export default function ResetPasswordForm() {
           <AnimatePresence>
             {success && <FormSuccess message={success} />}
           </AnimatePresence>
-          <FormSubmitButton label="Submit" hasSpinner={isPending} />
+          <FormSubmitButton label="Reset" hasSpinner={isPending} />
         </form>
       </Form>
     </CardWrapper>

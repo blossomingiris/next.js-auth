@@ -50,12 +50,14 @@ export default function NewVerificationCard() {
           <CardWrapper
             headerTitle="Account verification"
             headerDescription=""
-            backButtonLabel="Back to Sign up"
+            backButtonLabel="Back Login"
             backButtonStyle="default"
-            backButtonHref={routePaths.createAccount}
+            backButtonHref={routePaths.login}
           >
             <div className="flex items-center w-full justify-center">
-              <p className="animate-pulse">Confirming your email address...</p>
+              <p className="animate-pulse pb-8 sm:pb-10 text-center">
+                Confirming your email address...
+              </p>
             </div>
           </CardWrapper>
         </div>
