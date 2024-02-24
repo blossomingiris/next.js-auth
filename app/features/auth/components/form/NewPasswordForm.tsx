@@ -20,7 +20,7 @@ import { Form } from '@/components/ui/Form'
 import { FormError } from '@/components/ui/FormError'
 import { FormSuccess } from '@/components/ui/FormSuccess'
 
-import usePasswordValidation from '../../hooks/usePasswordValidation'
+import usePasswordValidation from '../../../../../hooks/usePasswordValidation'
 import PasswordField from '../form-fields/PasswordField'
 import FormSubmitButton from '../ui/FormSubmitButton'
 import PasswordCriteriaList from '../ui/PasswordCriteriaList'
@@ -33,8 +33,8 @@ export default function NewPasswordForm() {
   const [switchConfirmPasswordIcon, setSwitchConfirmPasswordIcon] =
     useState(false)
   const [isPending, startTransition] = useTransition()
-  const [hasError, setHasError] = useState<string | undefined>('')
-  const [hasSuccess, setHasSuccess] = useState<string | undefined>('')
+  const [error, setError] = useState<string | undefined>('')
+  const [success, setSuccess] = useState<string | undefined>('')
   const {
     isValid,
     password,
@@ -58,8 +58,8 @@ export default function NewPasswordForm() {
     } else {
       startTransition(() => {
         newPassword(values, token).then(data => {
-          if (data && data.success) setHasSuccess(data.success)
-          if (data && data.error) setHasError(data.error)
+          if (data && data.success) setSuccess(data.success)
+          if (data && data.error) setError(data.error)
         })
         setMessageVisible(true)
         form.reset()
@@ -73,20 +73,20 @@ export default function NewPasswordForm() {
   const { isDirty, dirtyFields } = form.formState
 
   const showErrorOrSuccessMessage = () => {
-    if (hasError) {
-      setHasError('')
+    if (error) {
+      setError('')
       setMessageVisible(false)
-    } else if (hasSuccess) {
-      setHasSuccess('')
+    } else if (success) {
+      setSuccess('')
       setMessageVisible(false)
     }
   }
 
   useEffect(() => {
-    if ((hasError || hasSuccess) && isDirty) {
+    if ((error || success) && isDirty) {
       setMessageVisible(false)
     }
-  }, [isDirty, hasError, hasSuccess])
+  }, [isDirty, error, success])
 
   return (
     <CardWrapper
@@ -124,10 +124,10 @@ export default function NewPasswordForm() {
             />
           </div>
           <AnimatePresence>
-            {isMessageVisible && <FormError message={hasError} />}
+            {isMessageVisible && <FormError message={error} />}
           </AnimatePresence>
           <AnimatePresence>
-            {isMessageVisible && <FormSuccess message={hasSuccess} />}
+            {isMessageVisible && <FormSuccess message={success} />}
           </AnimatePresence>
           <FormSubmitButton label="Submit" hasSpinner={isPending} />
         </form>

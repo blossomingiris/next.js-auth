@@ -18,7 +18,7 @@ import { Form } from '@/components/ui/Form'
 import { FormError } from '@/components/ui/FormError'
 import { FormSuccess } from '@/components/ui/FormSuccess'
 
-import usePasswordValidation from '../../hooks/usePasswordValidation'
+import usePasswordValidation from '../../../../../hooks/usePasswordValidation'
 import EmailField from '../form-fields/EmailField'
 import NameField from '../form-fields/NameField'
 import PasswordField from '../form-fields/PasswordField'
@@ -31,8 +31,8 @@ export function SignupForm() {
     useState(true)
   const [switchPasswordIcon, setSwitchPasswordIcon] = useState(false)
   const [isPending, startTransition] = useTransition()
-  const [hasError, setHasError] = useState<string | undefined>('')
-  const [hasSuccess, setHasSuccess] = useState<string | undefined>('')
+  const [error, setError] = useState<string | undefined>('')
+  const [success, setSuccess] = useState<string | undefined>('')
   const {
     isValid,
     password,
@@ -56,9 +56,9 @@ export function SignupForm() {
     } else {
       startTransition(() => {
         signup(values).then(data => {
-          if (data && data.success) setHasSuccess(data.success)
+          if (data && data.success) setSuccess(data.success)
           if (data && data.error)
-            setHasError(data.error || 'An expected error occurred')
+            setError(data.error || 'An expected error occurred')
         })
         setMessageVisible(true)
         form.reset()
@@ -70,20 +70,20 @@ export function SignupForm() {
   const { isDirty, dirtyFields } = form.formState
 
   const showErrorOrSuccessMessage = () => {
-    if (hasError) {
-      setHasError('')
+    if (error) {
+      setError('')
       setMessageVisible(false)
-    } else if (hasSuccess) {
-      setHasSuccess('')
+    } else if (success) {
+      setSuccess('')
       setMessageVisible(false)
     }
   }
 
   useEffect(() => {
-    if ((hasError || hasSuccess) && isDirty) {
+    if ((error || success) && isDirty) {
       setMessageVisible(false)
     }
-  }, [isDirty, hasError, hasSuccess])
+  }, [isDirty, error, success])
 
   return (
     <CardWrapper
@@ -132,10 +132,10 @@ export function SignupForm() {
             </div>
           </div>
           <AnimatePresence>
-            {isMessageVisible && <FormError message={hasError} />}
+            {isMessageVisible && <FormError message={error} />}
           </AnimatePresence>
           <AnimatePresence>
-            {isMessageVisible && <FormSuccess message={hasSuccess} />}
+            {isMessageVisible && <FormSuccess message={success} />}
           </AnimatePresence>
           <FormSubmitButton label="Create Account" hasSpinner={isPending} />
         </form>

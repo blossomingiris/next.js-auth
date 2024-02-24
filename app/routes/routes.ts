@@ -15,7 +15,7 @@ export const routePaths = {
  */
 
 export const publicRoutes: string[] = [
-  routePaths.home,
+  // routePaths.home,
   routePaths.authVerification,
 ]
 

@@ -40,12 +40,10 @@ export default function PasswordField<T extends FieldValues>({
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const enteredPassword = e.target.value
-    console.log(enteredPassword)
     if (name === 'password' && setSwitchPasswordIcon) {
       setSwitchPasswordIcon(enteredPassword.length > 0)
     }
     if (name === 'confirm_password' && setSwitchConfirmPasswordIcon) {
-      console.log('enteredPassword', enteredPassword)
       setSwitchConfirmPasswordIcon(enteredPassword.length > 0)
     }
     handlePasswordValidationChange &&

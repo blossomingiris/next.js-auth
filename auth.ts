@@ -8,7 +8,7 @@ import authConfig from '@/auth.config'
 import db from '@/lib/db'
 
 import { getTwoFactorConfirmationByUserId } from './helpers/getTwoFactorConfirmationByUserId'
-import { getUserByCondition } from './helpers/getUserByCondition'
+import { getUserById } from './helpers/getUserByCondition'
 
 declare module 'next-auth' {
   interface User {
@@ -23,7 +23,7 @@ export const {
   signOut,
 } = NextAuth({
   adapter: PrismaAdapter(db),
-  //custom sign-in and error pages
+  //custom Signin and Error pages
   pages: {
     signIn: '/auth/login',
     error: '/auth/error',
@@ -40,19 +40,14 @@ export const {
     async signIn({ user, account }) {
       // Allow user sign in with OAuth without email verification
       if (account?.provider !== 'credentials') return true
-      const existingUser = await getUserByCondition(user.id!)
-      // Allow user sign in with 2factor else block log in
+      const existingUser = await getUserById(user.id!)
+      // Allow user sign in with 2factor code else block log in
       if (existingUser && existingUser.isTwoFactorEnabled) {
         const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
           existingUser.id,
         )
         if (!twoFactorConfirmation) {
           return false
-        }
-        if (twoFactorConfirmation) {
-          await db.twoFactorToken.delete({
-            where: { id: twoFactorConfirmation.id },
-          })
         }
         return true
       }
@@ -63,19 +58,25 @@ export const {
         return false
       }
     },
-    async session({ session, token, user }) {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.sub,
-          role: user.role,
-        },
+    async session({ token, session }) {
+      if (token.sub && session.user) {
+        session.user.id = token.sub
       }
+
+      if (token.role && session.user) {
+        session.user.role = token.role as UserRole
+      }
+
+      if (session.user) {
+        session.user.name = token.name ?? session.user.name
+        session.user.email = token.email ?? session.user.email
+      }
+
+      return session
     },
     async jwt({ token }) {
       if (!token.sub) return token
-      const existingUser = await getUserByCondition(token.sub)
+      const existingUser = await getUserById(token.sub)
       if (!existingUser) return token
       // extend the token with user role
       return {

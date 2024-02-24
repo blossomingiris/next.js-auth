@@ -3,7 +3,7 @@
 import db from '@/lib/db'
 
 import { getVerificationTokenByToken } from '@/helpers/getToken'
-import { getUserByCondition } from '@/helpers/getUserByCondition'
+import { getUserByEmail } from '@/helpers/getUserByCondition'
 
 export async function newVerification(token: string) {
   const existingToken = await getVerificationTokenByToken(token)
@@ -17,7 +17,7 @@ export async function newVerification(token: string) {
     return { error: 'Verification token has been expired.' }
   }
 
-  const existingUser = await getUserByCondition(existingToken.email)
+  const existingUser = await getUserByEmail(existingToken.email)
 
   if (!existingUser) {
     return { error: 'Account with this email already exists.' }
@@ -29,13 +29,13 @@ export async function newVerification(token: string) {
   })
 
   //remove old verification token from db
-  // if (existingToken) {
-  //   await db.verificationToken.delete({
-  //     where: { id: existingUser.id },
-  //   })
-  // }
+  if (existingToken) {
+    await db.verificationToken.delete({
+      where: { id: existingUser.id },
+    })
+  }
 
   return {
-    success: 'Your account has been verified!',
+    success: 'Your account has been verified.',
   }
 }

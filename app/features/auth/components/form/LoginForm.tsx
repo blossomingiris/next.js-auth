@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState, useTransition } from 'react'
+import { useEffect, useMemo, useState, useTransition } from 'react'
 
 import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
@@ -22,6 +22,7 @@ import { FormError } from '@/components/ui/FormError'
 import { FormSuccess } from '@/components/ui/FormSuccess'
 import { RenderIf } from '@/components/ui/RenderIf'
 
+import CodeField from '../form-fields/CodeField'
 import EmailField from '../form-fields/EmailField'
 import PasswordField from '../form-fields/PasswordField'
 import BackButton from '../ui/BackButton'
@@ -50,32 +51,38 @@ export default function LoginForm() {
   })
 
   const onFormSubmit = (values: z.infer<typeof validation.login>) => {
+    setSwitchPasswordIcon(false)
     startTransition(() => {
       login(values)
         .then(data => {
           if (data && data.error) {
             setError(data.error)
-            form.reset()
+            if (data.error === '2FA code is not valid. Please try again.') {
+              form.resetField('code')
+            } else {
+              form.reset()
+            }
           }
           if (data && data.twoFactor) {
             setShowTwoFactorInput(true)
           }
         })
-        .catch(() => setError('Something went wrong'))
+        .catch(() => {
+          setError('Something went wrong.')
+        })
     })
-    setSwitchPasswordIcon(false)
-    setError('')
-    setSuccess('')
   }
 
   //handle success&error message
   const hasFormBeenTouched = form.formState.isDirty
 
-  if (error && hasFormBeenTouched) {
-    setError('')
-  } else if (success && hasFormBeenTouched) {
-    setSuccess('')
-  }
+  useEffect(() => {
+    if (error && hasFormBeenTouched) {
+      setError('')
+    } else if (success && hasFormBeenTouched) {
+      setSuccess('')
+    }
+  }, [error, success, hasFormBeenTouched])
 
   useMemo(() => {
     if (errorUrl) {
@@ -104,6 +111,9 @@ export default function LoginForm() {
                 setSwitchPasswordIcon={setSwitchPasswordIcon}
               />
             </RenderIf>
+            <RenderIf isTrue={showTwoFactorInput}>
+              <CodeField name="code" hasAutoFocus />
+            </RenderIf>
           </div>
           <BackButton
             backButtonLabel="Forgot your password?"
@@ -116,7 +126,10 @@ export default function LoginForm() {
           <AnimatePresence>
             {success && <FormSuccess message={success} />}
           </AnimatePresence>
-          <FormSubmitButton label="Login" hasSpinner={isPending} />
+          <FormSubmitButton
+            label={showTwoFactorInput ? 'Submit' : 'Login'}
+            hasSpinner={isPending}
+          />
         </form>
       </Form>
     </CardWrapper>

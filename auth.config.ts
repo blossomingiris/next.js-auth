@@ -1,10 +1,9 @@
-import bcrypt from 'bcryptjs'
 import type { NextAuthConfig } from 'next-auth'
 import Credentials from 'next-auth/providers/credentials'
 import GitHub from 'next-auth/providers/github'
 import Google from 'next-auth/providers/google'
 
-import { getUserByCondition } from './helpers/getUserByCondition'
+import { getUserByEmail } from './helpers/getUserByCondition'
 import { validation } from './lib/validation'
 
 export default {
@@ -21,11 +20,10 @@ export default {
       async authorize(credentials) {
         const validatedFields = validation.login.safeParse(credentials)
         if (validatedFields.success) {
-          const { email, password } = validatedFields.data
-          const user = await getUserByCondition(email)
+          const { email } = validatedFields.data
+          const user = await getUserByEmail(email)
           if (!user || !user.password) return null
-          const passwordsMatch = await bcrypt.compare(password, user.password)
-          if (passwordsMatch) return user
+          return user
         }
         return null
       },

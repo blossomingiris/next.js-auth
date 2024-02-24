@@ -8,7 +8,7 @@ import { sendVerificationEmail } from '@/lib/mail'
 import { validation } from '@/lib/validation'
 
 import { generateVerificationToken } from '@/helpers/generateToken'
-import { getUserByCondition } from '@/helpers/getUserByCondition'
+import { getUserByEmail } from '@/helpers/getUserByCondition'
 
 //?progressive enhancement
 export async function signup(values: z.infer<typeof validation.signup>) {
@@ -21,7 +21,7 @@ export async function signup(values: z.infer<typeof validation.signup>) {
   const { firstName, lastName, email, password } = validatedFields.data
   const hashedPassword = await bcrypt.hash(password, 10)
 
-  const existingUser = await getUserByCondition(email)
+  const existingUser = await getUserByEmail(email)
 
   if (existingUser) {
     return {
@@ -33,7 +33,7 @@ export async function signup(values: z.infer<typeof validation.signup>) {
   if (!existingUser) {
     await db.user.create({
       data: {
-        name: firstName + ' ' + lastName,
+        name: `${firstName} ${lastName}`,
         email,
         password: hashedPassword,
       },

@@ -41,8 +41,6 @@ export default function NewVerificationCard() {
     verifyToken()
   }, [token, verifyToken])
 
-  // refresh/create a new token
-
   return (
     <>
       <RenderIf isTrue={!error && !success}>
