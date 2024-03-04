@@ -14,11 +14,11 @@ const urbanist = Urbanist({
 
 export const metadata: Metadata = {
   title: {
-    default: 'XR Auth',
-    template: '%s | XR Auth',
+    default: 'XR-Auth',
+    template: '%s | XR-Auth',
   },
   description:
-    'A secure Next.js app build with JWT-based session management, 2FA, and RBAC using Prisma ORM, MongoDB, Resend, Tailwind and Framer Motion.',
+    'A Next.js app build with JWT-based session management, 2FA, and RBAC using Prisma ORM, MongoDB, Resend, Tailwind and Framer Motion.',
 }
 
 export default async function RootLayout({

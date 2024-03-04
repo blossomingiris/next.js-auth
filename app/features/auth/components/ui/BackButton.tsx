@@ -8,10 +8,16 @@ type BackButtonProps = {
   backButtonLabel: string
   backButtonHref: string
   backButtonStyle: 'default' | 'link'
+  isBackButtonDisabled?: boolean
 }
 
 export default function BackButton(props: BackButtonProps) {
-  const { backButtonLabel, backButtonHref, backButtonStyle = 'default' } = props
+  const {
+    backButtonLabel,
+    backButtonHref,
+    backButtonStyle = 'default',
+    isBackButtonDisabled = false,
+  } = props
 
   return (
     <Button
@@ -22,6 +28,7 @@ export default function BackButton(props: BackButtonProps) {
       type="button"
       size="lg"
       variant={backButtonStyle}
+      disabled={isBackButtonDisabled}
     >
       <Link href={backButtonHref}>{backButtonLabel}</Link>
     </Button>

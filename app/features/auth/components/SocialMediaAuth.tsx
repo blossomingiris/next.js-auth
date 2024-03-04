@@ -1,10 +1,9 @@
 'use client'
 
+import { DEFAULT_LOGIN_REDIRECT_URL } from '@/routes/routes'
 import { signIn } from 'next-auth/react'
 import { FaGithub } from 'react-icons/fa'
 import { FcGoogle } from 'react-icons/fc'
-
-import { DEFAULT_LOGIN_REDIRECT_URL } from '@/app/routes/routes'
 
 import { Button } from '@/components/ui/Button'
 

@@ -1,3 +1,4 @@
+// for client components
 import { useSession } from 'next-auth/react'
 
 export function useAuthUser() {

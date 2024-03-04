@@ -4,12 +4,11 @@ import { useCallback, useEffect, useState } from 'react'
 
 import { useSearchParams } from 'next/navigation'
 
+import { routePaths } from '@/routes/routes'
 import { FaCheckCircle } from 'react-icons/fa'
 import { MdErrorOutline } from 'react-icons/md'
 
 import { newVerification } from '@/actions/new-verification'
-
-import { routePaths } from '@/app/routes/routes'
 
 import { RenderIf } from '@/components/ui/RenderIf'
 
@@ -19,6 +18,7 @@ import CardWrapper from './ui/CardWrapper'
 export default function NewVerificationCard() {
   const [error, setError] = useState<string | undefined>()
   const [success, setSuccess] = useState<string | undefined>()
+  const [isLoading, setIsLoading] = useState(false)
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
 
@@ -27,12 +27,15 @@ export default function NewVerificationCard() {
       setError('Verification token not found.')
       return
     }
+    setIsLoading(true)
     newVerification(token).then(data => {
       try {
         setSuccess(data.success)
         setError(data.error)
       } catch (err) {
         setError('Something went wrong.')
+      } finally {
+        setIsLoading(false)
       }
     })
   }, [token])
@@ -51,6 +54,7 @@ export default function NewVerificationCard() {
             backButtonLabel="Back Login"
             backButtonStyle="default"
             backButtonHref={routePaths.login}
+            isBackButtonDisabled={isLoading}
           >
             <div className="flex items-center w-full justify-center">
               <p className="animate-pulse pb-8 sm:pb-10 text-center">
@@ -72,7 +76,7 @@ export default function NewVerificationCard() {
         {' '}
         <CardMessage
           type="success"
-          title="Success!"
+          title="Done!"
           description={success!}
           Icon={FaCheckCircle}
         />

@@ -5,9 +5,9 @@ import EmailTemplate from '@/app/features/auth/components/ui/EmailTemplate'
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 const resetPasswordDescription =
-  'To reset your password, please click the link below:'
+  'To reset your password, please click the button below:'
 const accountVerificationDescription =
-  'To verify your account, please click the link below:'
+  'To verify your account, please click the button below:'
 const twoFactorVerificationDescription =
   'Your two-factor authentication code is: '
 
@@ -21,11 +21,12 @@ export const sendVerificationEmail = async (
   await resend.emails.send({
     from: 'XR Auth <onboarding@resend.dev>',
     to: email,
-    subject: 'Account verification request',
+    subject: 'Account Verification request',
     react: EmailTemplate({
       username: username,
       url: confirmationLink,
       description: accountVerificationDescription,
+      buttonText: 'Verify',
     }),
   })
 }
@@ -40,11 +41,12 @@ export const sendPasswordResetEmail = async (
   await resend.emails.send({
     from: 'XR Auth <onboarding@resend.dev>',
     to: email,
-    subject: 'Password reset request',
+    subject: 'Password Reset request',
     react: EmailTemplate({
       username: username,
       url: resetPasswordLink,
       description: resetPasswordDescription,
+      buttonText: 'Reset',
     }),
   })
 }

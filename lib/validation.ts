@@ -39,4 +39,7 @@ export const validation = {
       message: "Passwords don't match",
       path: ['confirm_password'],
     }),
+  settings: z.object({
+    name: z.optional(z.string().trim()),
+  }),
 }

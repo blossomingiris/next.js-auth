@@ -17,12 +17,11 @@ export default function LogoutButton(props: LogoutButtonProps) {
     <Button
       type="button"
       onClick={() => signOut()}
-      className="px-2 py-3"
+      variant="outline"
+      className="w-full bg-white font-bold"
       title="logout"
     >
-      <span role="img" aria-label="Logout Icon">
-        {children}
-      </span>
+      {children}
     </Button>
   )
 }

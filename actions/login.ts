@@ -1,23 +1,20 @@
 'use server'
 
+import { DEFAULT_LOGIN_REDIRECT_URL } from '@/routes/routes'
 import bcrypt from 'bcryptjs'
 import { AuthError } from 'next-auth'
 import * as z from 'zod'
 
-import { DEFAULT_LOGIN_REDIRECT_URL } from '@/app/routes/routes'
-
 import { signIn } from '@/auth'
 
-import db from '@/lib/db'
+import db from '@/lib/db/db'
+import { generateTwoFactorToken } from '@/lib/db/generateToken'
+import { getTwoFactorTokenByEmail } from '@/lib/db/getToken'
+import { getTwoFactorConfirmationByUserId } from '@/lib/db/getTwoFactorConfirmationByUserId'
+import { getUserByEmail } from '@/lib/db/getUserByCondition'
 import { sendTwoFactorVerificationEmail } from '@/lib/mail'
 import { validation } from '@/lib/validation'
 
-import { generateTwoFactorToken } from '@/helpers/generateToken'
-import { getTwoFactorTokenByEmail } from '@/helpers/getToken'
-import { getTwoFactorConfirmationByUserId } from '@/helpers/getTwoFactorConfirmationByUserId'
-import { getUserByEmail } from '@/helpers/getUserByCondition'
-
-//?progressive enhancement
 export async function login(values: z.infer<typeof validation.login>) {
   const validatedFields = validation.login.safeParse(values)
   if (!validatedFields.success) {

@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSearchParams } from 'next/navigation'
 
+import { routePaths } from '@/routes/routes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AnimatePresence } from 'framer-motion'
 import { useForm } from 'react-hook-form'
@@ -13,7 +14,6 @@ import * as z from 'zod'
 import { login } from '@/actions/login'
 
 import CardWrapper from '@/app/features/auth/components/ui/CardWrapper'
-import { routePaths } from '@/app/routes/routes'
 
 import { validation } from '@/lib/validation'
 

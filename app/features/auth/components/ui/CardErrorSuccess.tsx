@@ -1,6 +1,5 @@
+import { routePaths } from '@/routes/routes'
 import { IconType } from 'react-icons/lib'
-
-import { routePaths } from '@/app/routes/routes'
 
 import { cn } from '@/lib/utils'
 

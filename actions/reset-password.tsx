@@ -2,11 +2,10 @@
 
 import * as z from 'zod'
 
+import { generatePasswordResetToken } from '@/lib/db/generateToken'
+import { getUserByEmail } from '@/lib/db/getUserByCondition'
 import { sendPasswordResetEmail } from '@/lib/mail'
 import { validation } from '@/lib/validation'
-
-import { generatePasswordResetToken } from '@/helpers/generateToken'
-import { getUserByCondition } from '@/helpers/getUserByCondition'
 
 export async function resetPassword(
   values: z.infer<typeof validation.resetPassword>,
@@ -18,7 +17,7 @@ export async function resetPassword(
     }
   }
   const { email } = validatedFields.data
-  const existingUser = await getUserByCondition(email)
+  const existingUser = await getUserByEmail(email)
   if (!existingUser) {
     return { error: 'Account with this email does not exist.' }
   }

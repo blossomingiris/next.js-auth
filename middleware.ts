@@ -1,16 +1,17 @@
 import NextAuth from 'next-auth'
 
+import authConfig from './auth.config'
 import {
   DEFAULT_LOGIN_REDIRECT_URL,
   apiAuthPrefix,
   authRoutes,
   publicRoutes,
   routePaths,
-} from './app/routes/routes'
-import authConfig from './auth.config'
+} from './routes/routes'
 
 const { auth } = NextAuth(authConfig)
 
+// @ts-expect-error: check https://github.com/nextauthjs/next-auth/issues/7569
 export default auth(req => {
   const { nextUrl } = req
   const isUserLoggedIn = !!req.auth
@@ -38,5 +39,5 @@ export default auth(req => {
 
 // 'auth' middleware wont't be invoked on following paths:
 export const config = {
-  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
 }

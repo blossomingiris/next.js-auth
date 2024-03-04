@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from 'react'
 
+import { routePaths } from '@/routes/routes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AnimatePresence } from 'framer-motion'
 import { useForm } from 'react-hook-form'
@@ -10,7 +11,6 @@ import * as z from 'zod'
 import { resetPassword } from '@/actions/reset-password'
 
 import CardWrapper from '@/app/features/auth/components/ui/CardWrapper'
-import { routePaths } from '@/app/routes/routes'
 
 import { validation } from '@/lib/validation'
 

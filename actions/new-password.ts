@@ -3,11 +3,10 @@
 import bcrypt from 'bcryptjs'
 import * as z from 'zod'
 
-import db from '@/lib/db'
+import db from '@/lib/db/db'
+import { getResetPasswordTokenByToken } from '@/lib/db/getToken'
+import { getUserByEmail } from '@/lib/db/getUserByCondition'
 import { validation } from '@/lib/validation'
-
-import { getResetPasswordTokenByToken } from '@/helpers/getToken'
-import { getUserByCondition } from '@/helpers/getUserByCondition'
 
 export const newPassword = async (
   values: z.infer<typeof validation.newPassword>,
@@ -37,7 +36,7 @@ export const newPassword = async (
     return { error: 'Verification token has been expired.' }
   }
 
-  const existingUser = await getUserByCondition(existingToken.email)
+  const existingUser = await getUserByEmail(existingToken.email)
 
   if (!existingUser) {
     return { error: `Account with this email doesn't exist.` }

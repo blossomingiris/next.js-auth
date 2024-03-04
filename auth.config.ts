@@ -3,7 +3,7 @@ import Credentials from 'next-auth/providers/credentials'
 import GitHub from 'next-auth/providers/github'
 import Google from 'next-auth/providers/google'
 
-import { getUserByEmail } from './helpers/getUserByCondition'
+import { getUserByEmail } from './lib/db/getUserByCondition'
 import { validation } from './lib/validation'
 
 export default {

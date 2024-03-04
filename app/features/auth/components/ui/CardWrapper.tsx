@@ -16,6 +16,7 @@ type CardWrapperProps = {
   backButtonHref: string
   backButtonStyle: 'default' | 'link'
   hasSocialMedia?: boolean
+  isBackButtonDisabled?: boolean
 }
 
 export default function CardWrapper(props: CardWrapperProps) {
@@ -27,6 +28,7 @@ export default function CardWrapper(props: CardWrapperProps) {
     backButtonHref,
     hasSocialMedia = false,
     backButtonStyle,
+    isBackButtonDisabled,
   } = props
 
   return (
@@ -44,6 +46,7 @@ export default function CardWrapper(props: CardWrapperProps) {
       <CardFooter>
         <BackButton
           backButtonLabel={backButtonLabel}
+          isBackButtonDisabled={isBackButtonDisabled}
           backButtonHref={backButtonHref}
           backButtonStyle={backButtonStyle}
         />

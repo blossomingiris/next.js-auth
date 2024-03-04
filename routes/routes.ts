@@ -7,29 +7,30 @@ export const routePaths = {
   authError: '/auth/error',
   resetPassword: '/auth/reset-password',
   newPassword: '/auth/new-password',
-  settings: 'settings',
+  profile: '/profile',
+  settings: '/settings',
+  admin: '/admin',
 }
 /**
  * An array of routes that do not require authentication.
  * @type — {string[]}
  */
 
-export const publicRoutes: string[] = [
-  // routePaths.home,
-  routePaths.authVerification,
-]
+export const publicRoutes: string[] = [routePaths.authVerification]
 
 /**
  * An array of routes that are used for authentication.
- * These routes will redirect logged in user to '/settings.
+ * These routes will redirect logged in user to '/profile.
  * @type — {string[]}
  */
 export const authRoutes: string[] = [
+  routePaths.home,
   routePaths.login,
   routePaths.createAccount,
   routePaths.authError,
   routePaths.resetPassword,
   routePaths.newPassword,
+  routePaths.home,
 ]
 
 /**
@@ -39,4 +40,4 @@ export const authRoutes: string[] = [
  */
 export const apiAuthPrefix = '/api/auth'
 
-export const DEFAULT_LOGIN_REDIRECT_URL = '/settings'
+export const DEFAULT_LOGIN_REDIRECT_URL = '/profile'

@@ -5,9 +5,9 @@ import {
   getResetPasswordTokenByEmail,
   getTwoFactorTokenByEmail,
   getVerificationTokenByEmail,
-} from '@/helpers/getToken'
+} from '@/lib/db/getToken'
 
-import db from '../lib/db'
+import db from './db'
 
 export const generateVerificationToken = async (email: string) => {
   const token = uuidv4()

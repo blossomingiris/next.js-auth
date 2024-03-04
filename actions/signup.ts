@@ -3,14 +3,12 @@
 import bcrypt from 'bcryptjs'
 import * as z from 'zod'
 
-import db from '@/lib/db'
+import db from '@/lib/db/db'
+import { generateVerificationToken } from '@/lib/db/generateToken'
+import { getUserByEmail } from '@/lib/db/getUserByCondition'
 import { sendVerificationEmail } from '@/lib/mail'
 import { validation } from '@/lib/validation'
 
-import { generateVerificationToken } from '@/helpers/generateToken'
-import { getUserByEmail } from '@/helpers/getUserByCondition'
-
-//?progressive enhancement
 export async function signup(values: z.infer<typeof validation.signup>) {
   const validatedFields = validation.signup.safeParse(values)
   if (!validatedFields.success) {
