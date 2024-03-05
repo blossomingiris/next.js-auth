@@ -13,7 +13,7 @@ import { getTwoFactorConfirmationByUserId } from './lib/db/getTwoFactorConfirmat
 import { getUserById } from './lib/db/getUserByCondition'
 
 declare module 'next-auth' {
-  interface User {
+  export interface User {
     role: UserRole
     isTwoFactorEnabled: boolean
     isOAuth: boolean
@@ -33,6 +33,7 @@ export const {
   auth,
   signIn,
   signOut,
+  unstable_update,
 } = NextAuth({
   adapter: PrismaAdapter(db) as Adapter,
   //custom Signin and Error pages
@@ -92,7 +93,7 @@ export const {
 
       return session
     },
-    async jwt({ token }) {
+    async jwt({ token, trigger, session }) {
       if (!token.sub) return token
 
       const existingUser = await getUserById(token.sub)
@@ -101,13 +102,24 @@ export const {
 
       const existingAccount = await getAccountByUserId(existingUser.id)
 
-      token.isOAuth = !!existingAccount
-      token.name = existingUser.name
-      token.email = existingUser.email
-      token.role = existingUser.role
-      token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled
+      if (trigger === 'update' && session) {
+        return {
+          ...token,
+          name: session.user.name,
+          email: session.user.email,
+          role: session.user.role,
+          isTwoFactorEnabled: session.isTwoFactorEnabled,
+        }
+      }
 
-      return token
+      return {
+        ...token,
+        name: existingUser.name,
+        email: existingUser.email,
+        role: existingUser.role,
+        isTwoFactorEnabled: existingUser.isTwoFactorEnabled,
+        isOAuth: !!existingAccount,
+      }
     },
   },
   session: { strategy: 'jwt' },

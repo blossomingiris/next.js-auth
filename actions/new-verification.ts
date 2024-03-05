@@ -6,6 +6,7 @@ import { getUserByEmail } from '@/lib/db/getUserByCondition'
 
 export async function newVerification(token: string) {
   const existingToken = await getVerificationTokenByToken(token)
+
   if (!existingToken) {
     return { error: 'Verification token not found.' }
   }
@@ -27,14 +28,16 @@ export async function newVerification(token: string) {
     data: { emailVerified: new Date(), email: existingToken.email },
   })
 
-  //remove old verification token from db
-  if (existingToken) {
-    await db.verificationToken.delete({
-      where: { id: existingUser.id },
-    })
-  }
+  const verifiedUser = await getUserByEmail(existingToken.email)
 
-  return {
-    success: 'Your account has been verified.',
+  if (!!verifiedUser?.emailVerified) {
+    await db.verificationToken.delete({
+      where: { id: existingToken.id },
+    })
+    return {
+      success: 'Your account has been verified.',
+    }
+  } else {
+    return { error: 'Email verification failed.' }
   }
 }

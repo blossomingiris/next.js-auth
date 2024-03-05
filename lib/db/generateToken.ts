@@ -13,6 +13,7 @@ export const generateVerificationToken = async (email: string) => {
   const token = uuidv4()
   const expires = new Date(new Date().getTime() + 3600 * 1000) // token expires in 1 hour
   const existingToken = await getVerificationTokenByEmail(email)
+
   if (existingToken) {
     await db.verificationToken.delete({
       where: {
@@ -53,7 +54,7 @@ export const generatePasswordResetToken = async (email: string) => {
 
 export const generateTwoFactorToken = async (email: string) => {
   const token = crypto.randomInt(100_000, 1000_000).toString() // 2fa code contains random 6 digits
-  const expires = new Date(new Date().getTime() + 5 * 60 * 1000) // 2fa code expires in 5 minutes
+  const expires = new Date(new Date().getTime() + 10 * 60 * 1000) // 2fa code expires in 10 minutes
   const existingToken = await getTwoFactorTokenByEmail(email)
 
   if (existingToken) {

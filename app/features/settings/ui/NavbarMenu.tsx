@@ -4,15 +4,14 @@ import { useAuthUser } from '@/hooks/useAuthUser'
 import { FaUser } from 'react-icons/fa'
 import { MdLogout } from 'react-icons/md'
 
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-
-import LogoutButton from './LogoutButton'
+import LogoutButton from '@/components/ui/LogoutButton'
 
 export default function NavbarMenu() {
   const user = useAuthUser()
@@ -27,7 +26,7 @@ export default function NavbarMenu() {
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="bg-white">
         <LogoutButton>
           <DropdownMenuItem className="cursor-pointer">
             <MdLogout className="mr-2" size={22} /> Logout

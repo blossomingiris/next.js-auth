@@ -11,15 +11,17 @@ const accountVerificationDescription =
 const twoFactorVerificationDescription =
   'Your two-factor authentication code is: '
 
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL
+
 export const sendVerificationEmail = async (
   email: string,
   token: string,
   username: string,
 ) => {
-  const confirmationLink = `http://localhost:3000/auth/new-verification?token=${token}`
+  const confirmationLink = `${BASE_URL}/auth/new-verification?token=${token}`
 
   await resend.emails.send({
-    from: 'XR Auth <onboarding@resend.dev>',
+    from: 'XR-Auth <onboarding@resend.dev>',
     to: email,
     subject: 'Account Verification request',
     react: EmailTemplate({
@@ -36,10 +38,10 @@ export const sendPasswordResetEmail = async (
   token: string,
   username: string,
 ) => {
-  const resetPasswordLink = `http://localhost:3000/auth/new-password?token=${token}`
+  const resetPasswordLink = `${BASE_URL}/auth/new-password?token=${token}`
 
   await resend.emails.send({
-    from: 'XR Auth <onboarding@resend.dev>',
+    from: 'XR-Auth <onboarding@resend.dev>',
     to: email,
     subject: 'Password Reset request',
     react: EmailTemplate({
@@ -57,12 +59,12 @@ export const sendTwoFactorVerificationEmail = async (
   username: string,
 ) => {
   await resend.emails.send({
-    from: 'XR Auth <onboarding@resend.dev>',
+    from: 'XR-Auth <onboarding@resend.dev>',
     to: email,
     subject: '2FA Code',
     react: EmailTemplate({
       username: username,
-      description: twoFactorVerificationDescription + token,
+      description: `${twoFactorVerificationDescription} ${token} (expired in 10 minutes)`,
     }),
   })
 }

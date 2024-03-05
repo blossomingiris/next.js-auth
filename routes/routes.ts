@@ -16,7 +16,10 @@ export const routePaths = {
  * @type — {string[]}
  */
 
-export const publicRoutes: string[] = [routePaths.authVerification]
+export const publicRoutes: string[] = [
+  routePaths.authVerification,
+  routePaths.home,
+]
 
 /**
  * An array of routes that are used for authentication.
@@ -24,7 +27,6 @@ export const publicRoutes: string[] = [routePaths.authVerification]
  * @type — {string[]}
  */
 export const authRoutes: string[] = [
-  routePaths.home,
   routePaths.login,
   routePaths.createAccount,
   routePaths.authError,

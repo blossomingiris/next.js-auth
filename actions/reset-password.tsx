@@ -4,7 +4,7 @@ import * as z from 'zod'
 
 import { generatePasswordResetToken } from '@/lib/db/generateToken'
 import { getUserByEmail } from '@/lib/db/getUserByCondition'
-import { sendPasswordResetEmail } from '@/lib/mail'
+import { sendPasswordResetEmail } from '@/lib/email'
 import { validation } from '@/lib/validation'
 
 export async function resetPassword(

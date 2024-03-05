@@ -4,6 +4,7 @@ import { useEffect, useState, useTransition } from 'react'
 
 import { useSearchParams } from 'next/navigation'
 
+import usePasswordValidation from '@/hooks/usePasswordValidation'
 import { routePaths } from '@/routes/routes'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { AnimatePresence } from 'framer-motion'
@@ -20,7 +21,6 @@ import { Form } from '@/components/ui/Form'
 import { FormError } from '@/components/ui/FormError'
 import { FormSuccess } from '@/components/ui/FormSuccess'
 
-import usePasswordValidation from '../../../../../hooks/usePasswordValidation'
 import PasswordField from '../form-fields/PasswordField'
 import FormSubmitButton from '../ui/FormSubmitButton'
 import PasswordCriteriaList from '../ui/PasswordCriteriaList'

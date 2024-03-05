@@ -1,3 +1,4 @@
+import { UserRole } from '@prisma/client'
 import { z } from 'zod'
 
 export const validation = {
@@ -39,7 +40,54 @@ export const validation = {
       message: "Passwords don't match",
       path: ['confirm_password'],
     }),
-  settings: z.object({
-    name: z.optional(z.string().trim()),
-  }),
+  settings: z
+    .object({
+      name: z.optional(z.string().trim()),
+      isTwoFactorEnabled: z.optional(z.boolean()),
+      role: z.enum([UserRole.ADMINISTRATOR, UserRole.USER]),
+      email: z.optional(
+        z
+          .string()
+          .email('Invalid email format: e.g. jane.doe@example.com')
+          .trim(),
+      ),
+      password: z.optional(z.string().trim()),
+      confirm_password: z.optional(z.string().trim()),
+    })
+    .refine(
+      data => {
+        if (data.password && !data.confirm_password) {
+          return false
+        }
+        return true
+      },
+      {
+        message: 'Confirm password required',
+        path: ['confirm_password'],
+      },
+    )
+    .refine(
+      data => {
+        if (!data.password && data.confirm_password) {
+          return false
+        }
+        return true
+      },
+      {
+        message: 'Password required',
+        path: ['password'],
+      },
+    )
+    .refine(
+      data => {
+        if (data.password !== data.confirm_password) {
+          return false
+        }
+        return true
+      },
+      {
+        message: "Passwords don't match",
+        path: ['confirm_password'],
+      },
+    ),
 }

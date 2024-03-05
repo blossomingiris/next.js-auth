@@ -17,6 +17,7 @@ export default {
       clientSecret: process.env.AUTH_GOOGLE_CLIENT_SECRET as string,
     }),
     Credentials({
+      //@ts-expect-error ts next-auth issues
       async authorize(credentials) {
         const validatedFields = validation.login.safeParse(credentials)
         if (validatedFields.success) {

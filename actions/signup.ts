@@ -6,7 +6,7 @@ import * as z from 'zod'
 import db from '@/lib/db/db'
 import { generateVerificationToken } from '@/lib/db/generateToken'
 import { getUserByEmail } from '@/lib/db/getUserByCondition'
-import { sendVerificationEmail } from '@/lib/mail'
+import { sendVerificationEmail } from '@/lib/email'
 import { validation } from '@/lib/validation'
 
 export async function signup(values: z.infer<typeof validation.signup>) {
@@ -42,7 +42,7 @@ export async function signup(values: z.infer<typeof validation.signup>) {
     await sendVerificationEmail(
       verificationToken.email,
       verificationToken.token,
-      firstName + lastName,
+      `${firstName} ${lastName}`,
     )
     return {
       success:

@@ -12,7 +12,7 @@ import { generateTwoFactorToken } from '@/lib/db/generateToken'
 import { getTwoFactorTokenByEmail } from '@/lib/db/getToken'
 import { getTwoFactorConfirmationByUserId } from '@/lib/db/getTwoFactorConfirmationByUserId'
 import { getUserByEmail } from '@/lib/db/getUserByCondition'
-import { sendTwoFactorVerificationEmail } from '@/lib/mail'
+import { sendTwoFactorVerificationEmail } from '@/lib/email'
 import { validation } from '@/lib/validation'
 
 export async function login(values: z.infer<typeof validation.login>) {
@@ -59,7 +59,7 @@ export async function login(values: z.infer<typeof validation.login>) {
       const hasExpired = new Date(twoFactorToken.expires) < new Date()
 
       if (hasExpired) {
-        return { error: 'Code expired!' }
+        return { error: '2FA code is expired!' }
       }
 
       await db.twoFactorToken.delete({

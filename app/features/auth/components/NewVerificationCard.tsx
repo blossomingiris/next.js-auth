@@ -58,7 +58,7 @@ export default function NewVerificationCard() {
           >
             <div className="flex items-center w-full justify-center">
               <p className="animate-pulse pb-8 sm:pb-10 text-center">
-                Confirming your email address...
+                One moment while we confirm your email address....
               </p>
             </div>
           </CardWrapper>

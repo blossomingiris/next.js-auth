@@ -25,7 +25,7 @@ export default function EmailTemplate(props: EmailTemplateProps) {
   return (
     <Html>
       <Head />
-      <Preview>Enhanced Authentication and Authorization Application.</Preview>
+      <Preview>Enhanced Authentication and Authorization with XR-Auth</Preview>
       <Body style={main}>
         <Container style={container}>
           <Text style={paragraph}>Hi {username},</Text>
@@ -40,7 +40,7 @@ export default function EmailTemplate(props: EmailTemplateProps) {
           <Text style={paragraph}>
             Best,
             <br />
-            The XR-Auth
+            XR-Auth
           </Text>
           <Hr style={hr} />
           <Text style={footer}>123 Main Street, Athens, Greece</Text>
@@ -71,12 +71,12 @@ const btnContainer = {
 }
 
 const button = {
-  fontSize: '14px',
+  fontSize: '16px',
   backgroundColor: '#479eae',
   color: '#fff',
   lineHeight: 1.5,
   borderRadius: '0.5em',
-  padding: '12px 24px',
+  padding: '8px 16px',
 }
 
 const hr = {
