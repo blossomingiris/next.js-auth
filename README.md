@@ -7,18 +7,17 @@ This is a Next.js 14 project that uses NextAuth.js for simple email + password l
 
 ## Tech stack
 
-- [Next.js]((https://nextjs.org/docs)
-- NextAuth
-- Prisma
-- MongoDB
-- Tailwind
-- Shadcn
-- Framer Motion
-- Resend
-- React-email
-- React-hook-form
-- Zod
-
+- [Next.js](https://nextjs.org/docs)
+- [NextAuth](https://authjs.dev/getting-started/introduction)
+- [Prisma](https://www.prisma.io/docs)
+- [MongoDB](https://www.mongodb.com)
+- [Tailwind](https://tailwindcss.com/docs/installation)
+- [Shadcn](https://ui.shadcn.com/docs)
+- [Framer Motion](https://www.framer.com/motion)
+- [Resend](https://resend.com/docs/introduction)
+- [React-email](https://react.email/docs/introduction)
+- [React-hook-form](https://react-hook-form.com)
+- [Zod](https://zod.dev)
 
 
 ## Getting Started
@@ -45,44 +44,64 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 Setup your own eviroment variables in .env in project root directory:
 
-```DATABASE_URL (MongodDB)
-AUTH_SECRET (NextAuth)
-
+```DATABASE_URL
+AUTH_SECRET
 AUTH_GITHUB_CLIENT_ID 
 AUTH_GITHUB_CLIENT_SECRET
-
 AUTH_GOOGLE_CLIENT
 AUTH_GOOGLE_CLIENT_SECRET
-
 RESEND_API_KEY
-
 NEXT_PUBLIC_APP_URL
 ```
 
 ## Usage
 
-### Create new account
-User can create new acount to fill following field: first name, last name, email and password. All fields required and have validation on client and server side.
-After user creates new can he will recieve an email with link, navigates to this link bring him to email verification page, after email will verified user can successfully login.
-Intially 2FA authefication is disabled. User can enable when he navigates to "./settings' page and swithh button to 'on'
+### Creating a New Account
+1. Users can create a new account by filling out the following fields:
+- First name
+- Last name
+- Email
+- Password
+- 
+All fields are required and undergo validation both on the client and server sides.
 
-User can create account witn his Google and Github Provider
-In this case userwill not recieved verification email or can't set 2FA (handles by Google and Github itself)
-User details will be stored in Session 
+2. After creating a new account, the user will receive an email containing a verification link. Clicking on this link will take them to the email verification page.
+3. Once the email is verified, the user can log in.
+   
+Initially, two-factor authentication (2FA) is disabled.
+Users can enable it by navigating to the "./settings" page and toggling the button to 'on'.
+Using External Providers
+Users also have the option to create an account using their Google or Github credentials.
+In this case, they won't receive a verification email or be able to set up 2FA since this is handled by Google and Github themselves.
+User details will be stored in the session.
+Logging In
+Users can log in to the application using:
+Email and password
+Google or Github accounts.
+Important Note
+Users can create or log in to the application using either their Google or Github provider exclusively.
+For security reasons, NextAuth's default behavior is to not link accounts from different providers.
+Resetting Password
+To reset their password, users need to:
+Click on the 'Reset Password' link.
+They will be directed to a page where they can enter their email address.
+After that, they will receive a link in their email to create a new password.
 
 
-### Login 
-User can login in apllication with his email + password login or using his Google or Github accounts
+### Further details
+After successfully logging in, user can access three pages:
+- 'My Profile' page: displaying user details.
+- 'Administrator' page: listing registered users of the application (accessible if the user has an 'Administrator' role).
+- 'Settings' page: where user who log in using email + password can change their details:
+  - name
+  - password
+  - email
+  - user role to 'Administrator' (default role is 'User')
+  - activate 2FA
+-  User who log in with Google or Github will have ability only to change his user role to 'Administrator' (default role is 'User')
 
-Important note: User can create/login to aplication using only or Google or only Github provider, for security reason is default behaving for NextAuth to not link account for different providers.
-
-### Reset Password 
-
-To reset password user need click link 'Reset Password' he will be navigating to Reset password page, where he need provide his email. After he will recieve link to his email where he can creatr new password.
-
-### Futhermore
-
-After Sucessfull login user can see 3 pages: his profile page with his details, admin page (with registed uaers of application, if he has role 'Administrator') and Settings Page (user that login using email + password eble to change his details) user that login with Goodle or Github only his role for (Administrator or User).
+#### Logout
+To log out of the application, users can simply click on their Avatar icon and select the "Log out" option.
 
 ## Challenges and issues
 
@@ -94,4 +113,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Live 
 
-Deployed apllication here.
+Deployed apllication [here](https://xr-auth.vercel.app).
