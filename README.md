@@ -98,7 +98,7 @@ After successfully logging in, user can access three pages:
   - email
   - user role to 'Administrator' (default role is 'User')
   - activate 2FA
--  User who log in with Google or Github will have ability only to change his user role to 'Administrator' (default role is 'User')
+-  User who log in with Google or Github will have ability only to change his user role to 'Administrator' (default role is 'User').
 
 #### Logout
 To log out of the application, users can simply click on their Avatar icon and select the "Log out" option.
@@ -113,4 +113,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Live 
 
-Deployed apllication [here](https://xr-auth.vercel.app).
+Deployed apllication is [here](https://xr-auth.vercel.app).
