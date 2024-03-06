@@ -109,7 +109,7 @@ XR-Auth is experimental project. My goal was to become more familiar with Next.j
 
 It was a challenge to use NextAuth.js, probably because of their migration to version 5, which hasn't smoothly integrated with TypeScript yet. Additionally, there were gaps in the documentation which made the learning curve steeper. As a result, I wouldn't consider it suitable for production use at this stage.
 
-I also had my first experience working with Shadcn, a nice tailwind component library, but it can add another level of component abstraction, which might not be necessary for small apps like XR-Auth. New discovery for me was react-email small library that very useful for creating email newsletters and I am planing to use it in the future.
+I also had my first experience working with Shadcn, a nice tailwind component library, but it can add another level of component abstraction, which might not be necessary for small apps like XR-Auth. New discovery for me was react-email - small library that very useful for creating email newsletters and I am planing to use it in the future.
 
 Some tech I've used before, like react-hook-form, zod, and framer-motion (for personal projects), are quite reliable and among my favorites to use.
 
