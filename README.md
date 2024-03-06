@@ -89,21 +89,29 @@ After that, they will receive a link in their email to create a new password.
 
 
 ### Further details
-After successfully logging in, user can access three pages:
-- 'My Profile' page: displaying user details.
-- 'Administrator' page: representing in table registered users of the application (accessible if the user has an 'Administrator' role).
-- 'Settings' page: where user who log in using email + password can change their details:
+After successfully logging in, user can access 3 pages:
+- "My Profile" page: displaying user details.
+- "Administrator" page: representing in table registered users of the application (accessible if the user has an 'Administrator' role).
+- "Settings" page: where user who log in using email + password can change their details:
   - name
   - password
   - email
-  - user role to 'Administrator' (default role is 'User')
+  - user role to "Administrator" (default role is 'User')
   - activate 2FA
--  User who log in with Google or Github will have ability only to change his user role to 'Administrator' (default role is 'User').
+-  User who log in with Google or Github will have ability only to change his user role to "Administrator" (default role is 'User').
 
 #### Logout
-To log out of the application, users can simply click on their Avatar icon and select the "Log out" option.
+To log out of the application, user can simply click on his/her Avatar icon and select the "Log out" option.
 
 ## Challenges, issues, thougts
+
+XR-Auth is experimental project. My goal was to become more familiar with Next.js and challenge myself to build a fullstack authentication app. I find some features of Next.js, like the App router, pretty intuitive and nice to use, while server actions make connecting to the database easier. Moving from React.js to Next.js made me realize the need to completely update my mindset from client components to server components, requiring more time to become familiar with consepts as SSR, ISR, caching, hydratation, etc. 
+
+It was a challenge to use NextAuth.js, probably because of their migration to version 5, which hasn't smoothly integrated with TypeScript yet. Additionally, there were gaps in the documentation which made the learning curve steeper. As a result, I wouldn't consider it suitable for production use at this stage.
+
+I also had my first experience working with Shadcn, a nice tailwind component library, but it can add another level of component abstraction, which might not be necessary for small apps like XR-Auth. New discovery for me was react-email small library that very useful for creating email newsletters and I am planing to use it in the future.
+
+Some tech I've used before, like react-hook-form, zod, and framer-motion (for personal projects), are quite reliable and among my favorites to use.
 
 ## Deploy on Vercel
 
@@ -111,6 +119,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-## Live 
+## Live application
 
 Deployed apllication is [here](https://xr-auth.vercel.app).
