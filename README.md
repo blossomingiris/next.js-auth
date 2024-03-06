@@ -1,4 +1,4 @@
-# XR-Auth - advanced authefication and authorisation application
+# XR-Auth - authentication and authorization application
 
 ## Introduction
 
