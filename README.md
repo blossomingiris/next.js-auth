@@ -39,9 +39,9 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Urbanist, a custom Google Font.
 
-### Enviroment variables
+## Enviroment variables
 
 Setup your own eviroment variables in .env in project root directory:
 
@@ -56,10 +56,10 @@ AUTH_GOOGLE_CLIENT_SECRET
 
 RESEND_API_KEY
 
-NEXT_PUBLIC_APP_URL```
+NEXT_PUBLIC_APP_URL
+```
 
-
-### Usage
+## Usage
 
 ### Create new account
 User can create new acount to fill following field: first name, last name, email and password. All fields required and have validation on client and server side.
@@ -92,6 +92,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-### Live 
+## Live 
 
 Deployed apllication here.
