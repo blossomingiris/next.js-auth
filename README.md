@@ -57,46 +57,48 @@ NEXT_PUBLIC_APP_URL
 ## Usage
 
 ### Creating a New Account
-1. Users can create a new account by filling out the following fields:
+
+User can create new account in 2 ways: 
+
+1.  Users can create a new account by filling out the following fields:
 - First name
 - Last name
 - Email
 - Password
-- 
-All fields are required and undergo validation both on the client and server sides.
+  
+All fields are required and validated both on the client and server sides.
+After creating a new account, the user will receive an email containing a verification link. Clicking on this link will take them to the email verification page. Once the email is verified, the user can log in.
 
-2. After creating a new account, the user will receive an email containing a verification link. Clicking on this link will take them to the email verification page.
-3. Once the email is verified, the user can log in.
-   
-Initially, two-factor authentication (2FA) is disabled.
-Users can enable it by navigating to the "./settings" page and toggling the button to 'on'.
-Using External Providers
-Users also have the option to create an account using their Google or Github credentials.
-In this case, they won't receive a verification email or be able to set up 2FA since this is handled by Google and Github themselves.
-User details will be stored in the session.
-Logging In
-Users can log in to the application using:
-Email and password
-Google or Github accounts.
-Important Note
-Users can create or log in to the application using either their Google or Github provider exclusively.
-For security reasons, NextAuth's default behavior is to not link accounts from different providers.
-Resetting Password
-To reset their password, users need to:
-Click on the 'Reset Password' link.
-They will be directed to a page where they can enter their email address.
-After that, they will receive a link in their email to create a new password.
+2. Using Google or Github
+User also have the option to create an account using their Google or Github credentials. In this case, he/she won't receive a verification email or be able to set up 2FA since this is handled by Google and Github themselves.
 
+Important Note:
+Users can create or log in to the application using either their Google or Github provider exclusively. For security reasons, NextAuth's default behavior is to not link accounts from different providers.
+
+
+### Logging In
+User can log in to the application in 2 ways using:
+1  Email + password.
+2. Google or Github accounts.
+
+### 2FA
+Initially, two-factor authentication (2FA) is disabled. Users can enable it after login and by navigating to the "Setigs" page and toggling the 2FA button to 'on'. After this eveytime he/she want to login need confirm 6 digits code that was send to his email
+
+### Resetting Password
+To reset password, user need to:
+1. Click on the 'Forgot you password' link.
+2. He/she will be directed to a page where he/she can enter their email address. 
+3. After that, user will receive a link in their email to create a new password.
 
 ### Further details
 After successfully logging in, user can access 3 pages:
 - "My Profile" page: displaying user details.
 - "Administrator" page: representing in table registered users of the application (accessible if the user has an 'Administrator' role).
-- "Settings" page: where user who log in using email + password can change their details:
+- "Settings" page: where user who log in using email + password can update his/her details:
   - name
   - password
   - email
-  - user role to "Administrator" (default role is 'User')
+  - user role to "Administrator" (default user role is 'User')
   - activate 2FA
 -  User who log in with Google or Github will have ability only to change his user role to "Administrator" (default role is 'User').
 
@@ -105,7 +107,7 @@ To log out of the application, user can simply click on his/her Avatar icon and 
 
 ## Challenges, issues, thougts
 
-XR-Auth is experimental project. My goal was to become more familiar with Next.js and challenge myself to build a fullstack authentication app. I find some features of Next.js, like the App router, pretty intuitive and nice to use, while server actions make connecting to the database easier. Moving from React.js to Next.js made me realize the need to completely update my mindset from client components to server components, requiring more time to become familiar with consepts as SSR, ISR, caching, hydratation, etc. 
+XR-Auth is experimental project. My goal was to become more familiar with Next.js (new stack for me) and challenge myself to build a fullstack authentication app. I find some features of Next.js, like the App router, pretty intuitive and nice to use, while server actions make connecting to the database easier. Moving from React.js to Next.js made me realize the need to completely update my mindset from client components to server components, requiring more time to become familiar with consepts as SSR, ISR, caching, hydratation, etc. 
 
 It was a challenge to use NextAuth.js, probably because of their migration to version 5, which hasn't smoothly integrated with TypeScript yet. Additionally, there were gaps in the documentation which made the learning curve steeper. As a result, I wouldn't consider it suitable for production use at this stage.
 
