@@ -103,7 +103,7 @@ After successfully logging in, user can access three pages:
 #### Logout
 To log out of the application, users can simply click on their Avatar icon and select the "Log out" option.
 
-## Challenges and issues
+## Challenges, issues, thougts
 
 ## Deploy on Vercel
 
