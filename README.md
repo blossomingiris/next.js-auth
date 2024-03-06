@@ -1,4 +1,5 @@
-# XR-Auth 
+# XR-Auth - advanced authefication and authorisation application
+
 ## Introduction
 
 This is a Next.js 14 project that uses NextAuth.js for simple email + password login or OAuth, Prisma as the ORM, Resend for email notification and a MongoDB database to persist the data.
