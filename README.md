@@ -45,7 +45,7 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 Setup your own eviroment variables in .env in project root directory:
 
-DATABASE_URL (MongodDB)
+```DATABASE_URL (MongodDB)
 AUTH_SECRET (NextAuth)
 
 AUTH_GITHUB_CLIENT_ID 
@@ -56,7 +56,7 @@ AUTH_GOOGLE_CLIENT_SECRET
 
 RESEND_API_KEY
 
-NEXT_PUBLIC_APP_URL
+NEXT_PUBLIC_APP_URL```
 
 
 ### Usage
@@ -71,13 +71,12 @@ In this case userwill not recieved verification email or can't set 2FA (handles 
 User details will be stored in Session 
 
 
-
 ### Login 
 User can login in apllication with his email + password login or using his Google or Github accounts
 
 Important note: User can create/login to aplication using only or Google or only Github provider, for security reason is default behaving for NextAuth to not link account for different providers.
 
-## Reset Password 
+### Reset Password 
 
 To reset password user need click link 'Reset Password' he will be navigating to Reset password page, where he need provide his email. After he will recieve link to his email where he can creatr new password.
 
