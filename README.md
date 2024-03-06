@@ -91,7 +91,7 @@ After that, they will receive a link in their email to create a new password.
 ### Further details
 After successfully logging in, user can access three pages:
 - 'My Profile' page: displaying user details.
-- 'Administrator' page: listing registered users of the application (accessible if the user has an 'Administrator' role).
+- 'Administrator' page: representing in table registered users of the application (accessible if the user has an 'Administrator' role).
 - 'Settings' page: where user who log in using email + password can change their details:
   - name
   - password
