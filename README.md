@@ -82,7 +82,7 @@ All fields are required and validated both on the client and server sides.
 User also have the option to create an account using their Google or Github credentials.
 
 Important note:
-User can create or log in to the application using his/her Google or Github provider or using email + password exclusively. For security reasons, NextAuth's default behavior is to not link accounts from different providers.
+User can create or log in to the application using his/her Google or Github provider or using email + password exclusively. For security reasons, Auth.js default behavior is to not link accounts from different providers.
 
 ### Logging In
 User can log in to the application in 2 ways using:
