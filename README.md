@@ -135,6 +135,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 Deployed apllication is [here](https://xr-auth.vercel.app).
 
-### Issues
+### Issues that I working with
 1. After a user updates details in Settings page, certain changes may not immediately apply but will be reflected in the UI upon reloading the page.
 2. There is issue with github login, sometimes in not allow to login to app with Error that account cant be linked if you dont tryig to login to app with another proveder. 
