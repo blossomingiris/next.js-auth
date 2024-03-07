@@ -56,9 +56,10 @@ NEXT_PUBLIC_APP_URL
 
 ## Usage
 
-Auth.js use JSON Web Tokens (JWT) to create session. When a user signs in/loggin in, a JWT is generated and stored in an HttpOnly cookie. This cookie is protected from client-side JavaScript access, making it difficult for attackers to steal. Additionally, the JWT is encrypted with a secret key known only to the server. Even if an attacker manages to steal the JWT, they won't be able to decrypt it.
-
 ### Creating a New Account
+
+Auth.js use JSON Web Tokens (JWT) to create session. When a user signs in, a JWT is generated and stored in an HttpOnly cookie. This cookie is protected from client-side JavaScript access, making it difficult for attackers to steal. Additionally, the JWT is encrypted with a secret key known only to the server. Even if an attacker manages to steal the JWT, they won't be able to decrypt it.
+
 
 User can create new account in 2 ways:</br>
 
@@ -89,7 +90,7 @@ User can log in to the application in 2 ways using:
 2. Google or Github accounts.
 
 ### 2FA
-Initially, two-factor authentication (2FA) is disabled. Users can enable it after login and by navigating to the "Settigs" page and toggling the 2FA button to 'on'. After this eveytime he/she want to login need confirm 6 digits code that was send to his email. Code lifetime is 10 minutes.
+Initially, two-factor authentication (2FA) is disabled. Users can enable it after login and by navigating to the "Settings" page and toggling the 2FA button to 'on'. After this eveytime he/she want to login need confirm 6 digits code that was send to his email. Code lifetime is 10 minutes.
 If user using Google or Githib provider he/she won't receive a verification email or be able to set up 2FA since this is handled by Google and Github themselves.
 
 ### Resetting Password
