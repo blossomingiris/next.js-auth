@@ -58,8 +58,6 @@ export const settings = async (values: z.infer<typeof validation.settings>) => {
     delete values.confirm_password
   }
 
-  console.log('!values', values)
-
   const updatedUser = await db.user.update({
     where: { id: dbUser.id },
     data: { ...values },

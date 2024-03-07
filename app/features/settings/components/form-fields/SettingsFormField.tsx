@@ -28,8 +28,6 @@ type SettingsFormFieldProps = {
 export default function SettingsFormField(props: SettingsFormFieldProps) {
   const { name, label, placeholder, control, isOAuth } = props
 
-  console.log(isOAuth)
-
   return (
     <FormField
       control={control}

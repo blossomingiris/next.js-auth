@@ -73,14 +73,14 @@ export default function SettingsForm(props: SettingsFormProps) {
             name="name"
             label="Full Name"
             placeholder="e.g. Jane Doe"
-            isOAuth
+            isOAuth={user.isOAuth}
           />
           <SettingsFromField
             control={form.control}
             name="email"
             label="Email"
             placeholder="e.g. jane.doe@example.com"
-            isOAuth
+            isOAuth={user.isOAuth}
           />
           <SettingsFormSelect
             control={form.control}
