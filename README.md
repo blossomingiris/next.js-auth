@@ -56,6 +56,8 @@ NEXT_PUBLIC_APP_URL
 
 ## Usage
 
+Auth.js use JSON Web Tokens (JWT) to create session. When a user signs in/loggin in, a JWT is generated and stored in an HttpOnly cookie. This cookie is protected from client-side JavaScript access, making it difficult for attackers to steal. Additionally, the JWT is encrypted with a secret key known only to the server. Even if an attacker manages to steal the JWT, they won't be able to decrypt it.
+
 ### Creating a New Account
 
 User can create new account in 2 ways:</br>
@@ -77,8 +79,6 @@ All fields are required and validated both on the client and server sides.
 2. Using OAuth Provider (Google or Github)
    
 User also have the option to create an account using their Google or Github credentials.
-
-Auth.js use JSON Web Tokens (JWT) to create session. When a user signs in, a JWT is generated and stored in an HttpOnly cookie. This cookie is protected from client-side JavaScript access, making it difficult for attackers to steal. Additionally, the JWT is encrypted with a secret key known only to the server. Even if an attacker manages to steal the JWT, they won't be able to decrypt it.
 
 Important note:
 User can create or log in to the application using his/her Google or Github provider or using email + password exclusively. For security reasons, NextAuth's default behavior is to not link accounts from different providers.
