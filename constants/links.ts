@@ -6,7 +6,7 @@ export const links = [
     href: routePaths.profile,
   },
   {
-    label: 'Admin',
+    label: 'Administrator',
     href: routePaths.admin,
   },
   {

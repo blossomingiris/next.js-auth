@@ -3,10 +3,10 @@ import { ReactNode } from 'react'
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/Card'
 import { RenderIf } from '@/components/ui/RenderIf'
 
-import SocialMediaAuth from '../SocialMediaAuth'
-import BackButton from './BackButton'
-import CardOptionsLine from './CardOptionsLine'
-import CardTitle from './CardTitle'
+import SocialMediaAuth from './SocialMediaAuth'
+import BackButton from './ui/BackButton'
+import CardOptionsLine from './ui/CardOptionsLine'
+import CardTitle from './ui/CardTitle'
 
 type CardWrapperProps = {
   children: ReactNode

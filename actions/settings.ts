@@ -53,20 +53,12 @@ export const settings = async (values: z.infer<typeof validation.settings>) => {
   }
 
   if (values.password && values.confirm_password && dbUser.password) {
-    const matchedPassword = await bcrypt.compare(
-      values.password,
-      dbUser.password,
-    )
-
-    if (!matchedPassword) {
-      return {
-        error: 'Passwords do not match',
-      }
-    }
-
     const hashedPassword = await bcrypt.hash(values.confirm_password, 10)
     values.password = hashedPassword
+    delete values.confirm_password
   }
+
+  console.log('!values', values)
 
   const updatedUser = await db.user.update({
     where: { id: dbUser.id },

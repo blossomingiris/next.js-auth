@@ -1,4 +1,4 @@
-import Navbar from '@/app/features/settings/ui/Navbar'
+import Navbar from '@/app/features/settings/components/Navbar'
 
 export default function ProtectedLayout({
   children,

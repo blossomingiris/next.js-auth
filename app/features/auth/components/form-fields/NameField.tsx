@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { UseFormReturn } from 'react-hook-form'
+import { Control } from 'react-hook-form'
 import { LuUser } from 'react-icons/lu'
 
 import { cn } from '@/lib/utils'
@@ -19,25 +19,21 @@ type NameFieldProps = {
   placeholder: string
   label: string
   hasAutoFocus?: boolean
-  form: UseFormReturn<
-    {
-      password: string
-      email: string
-      firstName: string
-      lastName: string
-    },
-    any,
-    undefined
-  >
+  control: Control<{
+    email: string
+    password: string
+    firstName: string
+    lastName: string
+  }>
 }
 
 export default function NameField(props: NameFieldProps) {
-  const { form, name, placeholder, label, hasAutoFocus = false } = props
+  const { control, name, placeholder, label, hasAutoFocus = false } = props
   const [isNameFocused, setIsNameFocused] = useState(hasAutoFocus)
 
   return (
     <FormField
-      control={form.control}
+      control={control}
       name={name}
       render={({ field }) => (
         <FormItem>

@@ -18,7 +18,7 @@ export default function LogoutButton(props: LogoutButtonProps) {
       type="button"
       onClick={() => signOut()}
       variant="outline"
-      className="w-full bg-white font-bold"
+      className="w-full bg-white font-bold border-none"
       title="logout"
     >
       {children}

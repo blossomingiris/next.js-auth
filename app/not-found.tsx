@@ -1,6 +1,6 @@
 import { MdErrorOutline } from 'react-icons/md'
 
-import CardMessage from '@/app/features/auth/components/ui/CardErrorSuccess'
+import CardMessage from '@/app/features/auth/components/CardErrorSuccess'
 
 export default function NotFound() {
   return (

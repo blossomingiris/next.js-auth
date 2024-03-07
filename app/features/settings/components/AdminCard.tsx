@@ -17,7 +17,7 @@ export default async function AdminCard(props: AdminCardProps) {
   const users = await getAllUsers()
 
   return (
-    <Card className="w-[95vw] max-w-[650px] shadow-md">
+    <Card className="w-[95vw] max-w-[650px] shadow-md min-h-[720px]">
       <CardHeader>
         <p className="text-2xl font-semibold text-center">{label}</p>
       </CardHeader>

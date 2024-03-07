@@ -68,6 +68,33 @@ export const validation = {
     )
     .refine(
       data => {
+        if (data.password) {
+          const hasLowerCase = /[a-z]/.test(data.password)
+          const hasUpperCase = /[A-Z]/.test(data.password)
+          const hasDigit = /\d/.test(data.password)
+          const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(data.password)
+          const hasEightChars = /.{8,}/.test(data.password)
+
+          if (
+            !hasLowerCase ||
+            !hasUpperCase ||
+            !hasDigit ||
+            !hasSpecialChar ||
+            !hasEightChars
+          ) {
+            return false
+          }
+        }
+        return true
+      },
+      {
+        message:
+          'The password should include at least: one lowercase letter, one uppercase letter, one number, one special character, and be 8 characters long',
+        path: ['password'],
+      },
+    )
+    .refine(
+      data => {
         if (!data.password && data.confirm_password) {
           return false
         }
@@ -80,7 +107,11 @@ export const validation = {
     )
     .refine(
       data => {
-        if (data.password !== data.confirm_password) {
+        if (
+          data.password &&
+          data.confirm_password &&
+          data.password !== data.confirm_password
+        ) {
           return false
         }
         return true

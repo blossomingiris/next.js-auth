@@ -5,8 +5,8 @@ import { cn } from '@/lib/utils'
 
 import { Card, CardFooter, CardHeader } from '@/components/ui/Card'
 
-import BackButton from './BackButton'
-import CardTitle from './CardTitle'
+import BackButton from './ui/BackButton'
+import CardTitle from './ui/CardTitle'
 
 type CardMessageProps = {
   title: string

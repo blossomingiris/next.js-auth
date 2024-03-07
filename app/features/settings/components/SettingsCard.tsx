@@ -2,7 +2,7 @@ import { getAuthUser } from '@/helpers/authUser.server'
 
 import { Card, CardContent, CardHeader } from '@/components/ui/Card'
 
-import SettingsForm from '../components/SettingsForm'
+import SettingsForm from './form/SettingsForm'
 
 type SettingsCardProps = {
   label: string

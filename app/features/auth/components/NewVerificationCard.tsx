@@ -12,8 +12,8 @@ import { newVerification } from '@/actions/new-verification'
 
 import { RenderIf } from '@/components/ui/RenderIf'
 
-import CardMessage from './ui/CardErrorSuccess'
-import CardWrapper from './ui/CardWrapper'
+import CardMessage from './CardErrorSuccess'
+import CardWrapper from './CardWrapper'
 
 export default function NewVerificationCard() {
   const [error, setError] = useState<string | undefined>()

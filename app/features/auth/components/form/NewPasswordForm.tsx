@@ -13,7 +13,7 @@ import * as z from 'zod'
 
 import { newPassword } from '@/actions/new-password'
 
-import CardWrapper from '@/app/features/auth/components/ui/CardWrapper'
+import CardWrapper from '@/app/features/auth/components/CardWrapper'
 
 import { validation } from '@/lib/validation'
 
@@ -21,9 +21,9 @@ import { Form } from '@/components/ui/Form'
 import { FormError } from '@/components/ui/FormError'
 import { FormSuccess } from '@/components/ui/FormSuccess'
 
+import PasswordCriteriaList from '../PasswordCriteriaList'
 import PasswordField from '../form-fields/PasswordField'
 import FormSubmitButton from '../ui/FormSubmitButton'
-import PasswordCriteriaList from '../ui/PasswordCriteriaList'
 
 export default function NewPasswordForm() {
   const [isMessageVisible, setMessageVisible] = useState(false)

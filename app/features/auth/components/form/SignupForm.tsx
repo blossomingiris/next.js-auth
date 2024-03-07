@@ -11,7 +11,7 @@ import * as z from 'zod'
 
 import { signup } from '@/actions/signup'
 
-import CardWrapper from '@/app/features/auth/components/ui/CardWrapper'
+import CardWrapper from '@/app/features/auth/components/CardWrapper'
 
 import { validation } from '@/lib/validation'
 
@@ -19,11 +19,11 @@ import { Form } from '@/components/ui/Form'
 import { FormError } from '@/components/ui/FormError'
 import { FormSuccess } from '@/components/ui/FormSuccess'
 
+import PasswordCriteriaList from '../PasswordCriteriaList'
 import EmailField from '../form-fields/EmailField'
 import NameField from '../form-fields/NameField'
 import PasswordField from '../form-fields/PasswordField'
 import FormSubmitButton from '../ui/FormSubmitButton'
-import PasswordCriteriaList from '../ui/PasswordCriteriaList'
 
 export function SignupForm() {
   const [isMessageVisible, setMessageVisible] = useState(false)
@@ -98,14 +98,14 @@ export function SignupForm() {
         <form onSubmit={form.handleSubmit(onFormSubmit)}>
           <div className="space-y-4 mb-7">
             <NameField
-              form={form}
+              control={form.control}
               name="firstName"
               placeholder="Enter your first name"
               label="First name"
               hasAutoFocus
             />
             <NameField
-              form={form}
+              control={form.control}
               name="lastName"
               placeholder="Enter you last name"
               label="Last name"

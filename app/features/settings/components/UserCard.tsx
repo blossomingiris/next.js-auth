@@ -29,11 +29,11 @@ export default function UserCard(props: UserPropsCard) {
   )
 
   return (
-    <Card className="w-[95vw] max-w-[650px] shadow-md">
+    <Card className="w-[95vw] max-w-[650px] shadow-md min-h-[720px]">
       <CardHeader>
         <p className="text-2xl font-semibold text-center">{label}</p>
       </CardHeader>
-      <CardContent className="space-y-4 pb-8 sm:pb-10 ">
+      <CardContent className="space-y-5 pb-8 sm:pb-10 ">
         {profileDetail('User ID', user?.id)}
         {profileDetail('Full Name', user?.name)}
         {profileDetail('Email Address', user?.email)}

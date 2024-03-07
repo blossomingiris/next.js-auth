@@ -1,6 +1,6 @@
 import { Resend } from 'resend'
 
-import EmailTemplate from '@/app/features/auth/components/ui/EmailTemplate'
+import EmailTemplate from '@/app/features/auth/components/EmailTemplate'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -21,7 +21,7 @@ export const sendVerificationEmail = async (
   const confirmationLink = `${BASE_URL}/auth/new-verification?token=${token}`
 
   await resend.emails.send({
-    from: 'XR-Auth <onboarding@resend.dev>',
+    from: 'mail@xr-auth.online',
     to: email,
     subject: 'Account Verification request',
     react: EmailTemplate({
@@ -41,7 +41,7 @@ export const sendPasswordResetEmail = async (
   const resetPasswordLink = `${BASE_URL}/auth/new-password?token=${token}`
 
   await resend.emails.send({
-    from: 'XR-Auth <onboarding@resend.dev>',
+    from: 'mail@xr-auth.online',
     to: email,
     subject: 'Password Reset request',
     react: EmailTemplate({
@@ -59,7 +59,7 @@ export const sendTwoFactorVerificationEmail = async (
   username: string,
 ) => {
   await resend.emails.send({
-    from: 'XR-Auth <onboarding@resend.dev>',
+    from: 'mail@xr-auth.online',
     to: email,
     subject: '2FA Code',
     react: EmailTemplate({

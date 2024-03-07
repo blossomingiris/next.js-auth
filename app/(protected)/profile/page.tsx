@@ -1,4 +1,4 @@
-import UserCard from '@/app/features/settings/ui/UserCard'
+import UserCard from '@/app/features/settings/components/UserCard'
 
 import { getAuthUser } from '@/helpers/authUser.server'
 

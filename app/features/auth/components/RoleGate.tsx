@@ -17,7 +17,7 @@ export default function RoleGate(props: RoleGateProps) {
   if (user?.role !== allowedRole) {
     return (
       <p className="text-center">
-        You do not have Admin privileges to view the content of this page.
+        You do not have Administrator access to view the content of this page.
       </p>
     )
   }

@@ -10,7 +10,7 @@ import * as z from 'zod'
 
 import { resetPassword } from '@/actions/reset-password'
 
-import CardWrapper from '@/app/features/auth/components/ui/CardWrapper'
+import CardWrapper from '@/app/features/auth/components/CardWrapper'
 
 import { validation } from '@/lib/validation'
 

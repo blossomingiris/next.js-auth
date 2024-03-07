@@ -21,9 +21,7 @@ export const UsersTable = (props: UserTableProps) => {
         <tbody>
           {users?.map(user => (
             <tr key={user.id}>
-              <td className="border border-gray-200 p-2">
-                {user.id.slice(0, 5)}
-              </td>
+              <td className="border border-gray-200 p-2">{user.id}</td>
               <td className="border border-gray-200 p-2">{user.name}</td>
               <td className="border border-gray-200 p-2">{user.email}</td>
               <td className="border border-gray-200 p-2">{user.role}</td>
