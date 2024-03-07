@@ -81,7 +81,7 @@ All fields are required and validated both on the client and server sides.
    
 User also have the option to create an account using their Google or Github credentials.
 
-Important note:
+!Important note:
 User can create or log in to the application using his/her Google or Github provider or using email + password exclusively. For security reasons, Auth.js default behavior is to not link accounts from different providers.
 
 ### Logging In
@@ -109,7 +109,8 @@ After successfully logging in, user can access 3 pages:
   - email
   - user role to "Administrator" (default user role is 'User')
   - activate 2FA
--  User who log in with Google or Github will have ability only to change his user role to "Administrator" (default role is 'User').
+  - 
+ !Important note: User who log in with Google or Github will have ability only to change his user role to "Administrator" (default role is 'User').
 
 #### Logout
 To log out of the application, user can simply click on his/her Avatar icon and select the "Log out" option.
