@@ -61,6 +61,7 @@ NEXT_PUBLIC_APP_URL
 User can create new account in 2 ways: 
 
 1. Credentials-based login
+   
 1.1 Users can create a new account by filling out the following fields:
 - First name
 - Last name
@@ -73,6 +74,7 @@ All fields are required and validated both on the client and server sides.
 1.3. Clicking on this link will take them to the email verification page. Once the email is verified, the user can log in.
 
 2. Using OAuth Provider (Google or Github)
+   
 User also have the option to create an account using their Google or Github credentials.
 
 Auth.js use JSON Web Tokens (JWT) to create session. When a user signs in, a JWT is generated and stored in an HttpOnly cookie. This cookie is protected from client-side JavaScript access, making it difficult for attackers to steal. Additionally, the JWT is encrypted with a secret key known only to the server. Even if an attacker manages to steal the JWT, they won't be able to decrypt it.
