@@ -109,7 +109,7 @@ After successfully logging in, user can access 3 pages:
   - email
   - user role to "Administrator" (default user role is 'User')
   - activate 2FA
-  - 
+    
  !Important note: User who log in with Google or Github will have ability only to change his user role to "Administrator" or "User" (default user role is 'User').
 
 #### Logout
