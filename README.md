@@ -58,11 +58,11 @@ NEXT_PUBLIC_APP_URL
 
 ### Creating a New Account
 
-User can create new account in 2 ways: 
+User can create new account in 2 ways:</br>
 
-1. Credentials-based login
+1. Credentials-based login.</br>
    
-1.1 Users can create a new account by filling out the following fields:
+1.1 Users can create a new account by filling out the following fields:</br>
 - First name
 - Last name
 - Email
