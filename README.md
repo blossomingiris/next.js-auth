@@ -2,13 +2,13 @@
 
 ## Introduction
 
-This is a Next.js 14 project that uses NextAuth.js for simple email + password login or OAuth, Prisma as the ORM, Resend for email notification and a MongoDB database to persist the data.
+This is a Next.js 14 project that uses Auth.js for simple email + password login or OAuth, Prisma as the ORM, Resend for email notification and a MongoDB database to persist the data.
 
 
 ## Tech stack
 
 - [Next.js](https://nextjs.org/docs)
-- [NextAuth](https://authjs.dev/getting-started/introduction)
+- [Auth.js](https://authjs.dev/getting-started/introduction)
 - [Prisma](https://www.prisma.io/docs)
 - [MongoDB](https://www.mongodb.com)
 - [Tailwind](https://tailwindcss.com/docs/installation)
@@ -60,21 +60,25 @@ NEXT_PUBLIC_APP_URL
 
 User can create new account in 2 ways: 
 
-1.  Users can create a new account by filling out the following fields:
+1. Credentials-based login
+1.1 Users can create a new account by filling out the following fields:
 - First name
 - Last name
 - Email
 - Password
   
 All fields are required and validated both on the client and server sides.
-After creating a new account, the user will receive an email containing a verification link. Clicking on this link will take them to the email verification page. Once the email is verified, the user can log in.
 
-2. Using Google or Github
-User also have the option to create an account using their Google or Github credentials. In this case, he/she won't receive a verification email or be able to set up 2FA since this is handled by Google and Github themselves.
+1.2. After you create a new account, user get an email from mail@xr-auth.online with a verification link. Sometimes it might take a few minutes for the email to show up, and it could end up in spam folder.
+1.3. Clicking on this link will take them to the email verification page. Once the email is verified, the user can log in.
 
-Important Note:
-Users can create or log in to the application using either their Google or Github provider exclusively. For security reasons, NextAuth's default behavior is to not link accounts from different providers.
+2. Using OAuth Provider (Google or Github)
+User also have the option to create an account using their Google or Github credentials.
 
+Auth.js use JSON Web Tokens (JWT) to create session. When a user signs in, a JWT is generated and stored in an HttpOnly cookie. This cookie is protected from client-side JavaScript access, making it difficult for attackers to steal. Additionally, the JWT is encrypted with a secret key known only to the server. Even if an attacker manages to steal the JWT, they won't be able to decrypt it.
+
+Important note:
+User can create or log in to the application using his/her Google or Github provider or using email + password exclusively. For security reasons, NextAuth's default behavior is to not link accounts from different providers.
 
 ### Logging In
 User can log in to the application in 2 ways using:
@@ -82,7 +86,8 @@ User can log in to the application in 2 ways using:
 2. Google or Github accounts.
 
 ### 2FA
-Initially, two-factor authentication (2FA) is disabled. Users can enable it after login and by navigating to the "Setigs" page and toggling the 2FA button to 'on'. After this eveytime he/she want to login need confirm 6 digits code that was send to his email
+Initially, two-factor authentication (2FA) is disabled. Users can enable it after login and by navigating to the "Settigs" page and toggling the 2FA button to 'on'. After this eveytime he/she want to login need confirm 6 digits code that was send to his email. Code lifetime is 10 minutes.
+If user using Google or Githib provider he/she won't receive a verification email or be able to set up 2FA since this is handled by Google and Github themselves.
 
 ### Resetting Password
 To reset password, user need to:
@@ -105,11 +110,11 @@ After successfully logging in, user can access 3 pages:
 #### Logout
 To log out of the application, user can simply click on his/her Avatar icon and select the "Log out" option.
 
-## Challenges, issues, thougts
+## Challenges & thougts
 
-XR-Auth is experimental project. My goal was to become more familiar with Next.js (new stack for me) and challenge myself to build a fullstack authentication app. I find some features of Next.js, like the App router, pretty intuitive and nice to use, while server actions make connecting to the database easier. Moving from React.js to Next.js made me realize the need to completely update my mindset from client components to server components, requiring more time to become familiar with consepts as SSR, ISR, caching, hydratation, etc. 
+XR-Auth is experimental project. My goal was to become more familiar with Next.js (new stack for me) and challenge myself to build a fullstack authentication app. I find some features of Next.js, like the App router, pretty intuitive and nice to use, while server actions make connecting to the database easier. Moving from React.js to Next.js made me realize the need to completely update my mindset from client components to server components, requiring more time to become familiar with consepts as CSR, SSR, ISR, caching, etc. 
 
-It was a challenge to use NextAuth.js, probably because of their migration to version 5, which hasn't smoothly integrated with TypeScript yet. Additionally, there were gaps in the documentation which made the learning curve steeper. As a result, I wouldn't consider it suitable for production use at this stage.
+It was a challenge to use Auth.js (or NextAuth), probably because of their migration to version 5, which hasn't smoothly integrated with TypeScript yet. Additionally, there were gaps in the documentation which made the learning curve steeper. As a result, I wouldn't consider it suitable for production use at this stage.
 
 I also had my first experience working with Shadcn, a nice tailwind component library, but it can add another level of component abstraction, which might not be necessary for small apps like XR-Auth. New discovery for me was react-email - small library that very useful for creating email newsletters and I am planing to use it in the future.
 
@@ -124,3 +129,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Live application
 
 Deployed apllication is [here](https://xr-auth.vercel.app).
+
+### Issues
+1. After a user updates details in Settings page, certain changes may not immediately apply but will be reflected in the UI upon reloading the page.
+2. There is issue with github login, sometimes in not allow to login to app with Error that account cant be linked if you dont tryig to login to app with another proveder. 
