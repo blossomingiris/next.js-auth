@@ -110,7 +110,7 @@ After successfully logging in, user can access 3 pages:
   - user role to "Administrator" (default user role is 'User')
   - activate 2FA
   - 
- !Important note: User who log in with Google or Github will have ability only to change his user role to "Administrator" (default role is 'User').
+ !Important note: User who log in with Google or Github will have ability only to change his user role to "Administrator" or "User" (default user role is 'User').
 
 #### Logout
 To log out of the application, user can simply click on his/her Avatar icon and select the "Log out" option.
