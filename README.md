@@ -73,7 +73,7 @@ User can create new account in 2 ways:</br>
   
 All fields are required and validated both on the client and server sides.
 
-1.2. After you create a new account, user get an email from mail@xr-auth.online with a verification link. Sometimes it might take a few minutes for the email to show up, and it could end up in spam folder.</br>
+1.2. After user create a new account, he/she get an email from mail@xr-auth.online with a verification link. Sometimes it might take a few minutes for the email to show up, and it could end up in spam folder.</br>
 
 1.3. Clicking on this link will take them to the email verification page. Once the email is verified, the user can log in.
 
