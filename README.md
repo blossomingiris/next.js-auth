@@ -96,7 +96,7 @@ If user using Google or Githib provider he/she won't receive a verification emai
 ### Resetting Password
 To reset password, user need to:
 1. Click on the 'Forgot you password' link.
-2. He/she will be directed to a page where he/she can enter their email address. 
+2. User will be directed to a page where he/she can enter their email address. 
 3. After that, user will receive a link in their email to create a new password.
 
 ### Further details
