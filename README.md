@@ -137,5 +137,5 @@ Deployed apllication is [here](https://xr-auth.vercel.app).
 
 ### Ongoing Issues
 
-1. After a user updates details in Settings page, certain changes may not immediately apply but will be reflected in the UI upon reloading the page.
+1. After a user updates details in Settings page, certain changes may not immediately apply but will be reflected in the UI upon reloading the page (Administrator page).
 2. Some users may face difficulties logging in via GitHub. An error message might appear, stating that the account can't be linked. Trying to log in with another provider can help resolve this problem.
