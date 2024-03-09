@@ -22,7 +22,6 @@ interface EmailTemplateProps {
 export default function EmailTemplate(props: EmailTemplateProps) {
   const { username, url, description, buttonText } = props
 
-
   return (
     <Html>
       <Head />

@@ -37,7 +37,7 @@ export default async function RootLayout({
       >
         <SessionProvider session={session}>
           {children}
-          <Toaster position="top-right" closeButton richColors />
+          <Toaster position="top-center" closeButton richColors />
         </SessionProvider>
       </body>
     </html>

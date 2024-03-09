@@ -20,7 +20,10 @@ export const deleteUser = async () => {
     }
 
     await db.user.delete({ where: { id: dbUser.id } })
-    return { success: '"Your account has been successfully deleted.' }
+    return {
+      success:
+        'Your account has been successfully deleted. You will now be logged out.',
+    }
   } catch (error) {
     return { error: 'Unexpected error has occurred.' }
   }
