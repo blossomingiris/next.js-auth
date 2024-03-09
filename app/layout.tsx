@@ -5,6 +5,8 @@ import { SessionProvider } from 'next-auth/react'
 
 import { auth } from '@/auth'
 
+import { Toaster } from '@/components/ui/sonner'
+
 import './globals.css'
 
 const urbanist = Urbanist({
@@ -33,7 +35,10 @@ export default async function RootLayout({
       <body
         className={`${urbanist.className} bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#9feef6] to-[#A1C4FD] text-foreground`}
       >
-        <SessionProvider session={session}>{children}</SessionProvider>
+        <SessionProvider session={session}>
+          {children}
+          <Toaster position="top-right" closeButton richColors />
+        </SessionProvider>
       </body>
     </html>
   )

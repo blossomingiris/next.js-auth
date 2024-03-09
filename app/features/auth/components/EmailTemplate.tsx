@@ -22,10 +22,11 @@ interface EmailTemplateProps {
 export default function EmailTemplate(props: EmailTemplateProps) {
   const { username, url, description, buttonText } = props
 
+
   return (
     <Html>
       <Head />
-      <Preview>Enhanced Authentication and Authorization with XR-Auth</Preview>
+      <Preview>Secure Authentication and Authorization with XR-Auth</Preview>
       <Body style={main}>
         <Container style={container}>
           <Text style={paragraph}>Hi {username},</Text>

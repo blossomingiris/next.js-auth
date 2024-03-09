@@ -18,7 +18,7 @@ export default function UserCard(props: UserPropsCard) {
       <p className="font-medium">{title}</p>
       {typeof detail === 'boolean' ? (
         <span className="text-center py-1 px-2 bg-sky-100 rounded-md h-8">
-          {detail ? 'Active' : 'Inactive'}
+          {detail ? 'Yes' : 'No'}
         </span>
       ) : (
         <p className="truncate text-center py-1 px-2 bg-sky-100 rounded-md h-8 ">
@@ -29,7 +29,7 @@ export default function UserCard(props: UserPropsCard) {
   )
 
   return (
-    <Card className="w-[95vw] max-w-[650px] shadow-md min-h-[720px]">
+    <Card className="w-[95vw] max-w-[650px] shadow-md">
       <CardHeader>
         <p className="text-2xl font-semibold text-center">{label}</p>
       </CardHeader>
@@ -38,6 +38,7 @@ export default function UserCard(props: UserPropsCard) {
         {profileDetail('Full Name', user?.name)}
         {profileDetail('Email Address', user?.email)}
         {profileDetail('Role', user?.role)}
+        {profileDetail('OAuth', user?.isOAuth)}
         {profileDetail('2FA', user?.isTwoFactorEnabled)}
       </CardContent>
     </Card>

@@ -19,7 +19,7 @@ export default function HomePage() {
         <div className="space-y-6 text-center sm:text-left text-[#383838]">
           <h1 className="text-4xl sm:text-6xl font-extrabold ">XR-Auth</h1>
           <p className="text-lg sm:text-xl font-medium">
-            Enhanced Authentication and Authorization
+            Advanced Authentication and Authorization
           </p>
           <BackButton
             backButtonLabel="Let's Start"

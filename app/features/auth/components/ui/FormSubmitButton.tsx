@@ -14,7 +14,7 @@ export default function FormSubmitButton(props: FormSubmitButtonProps) {
 
   return (
     <Button
-      className="w-full font-semibold mt-3 text-lg active:scale-95 transition-all duration-200"
+      className="w-full font-semibold mt-5 text-lg active:scale-95 transition-all duration-200"
       size="lg"
       aria-disabled={hasSpinner}
     >

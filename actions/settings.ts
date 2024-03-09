@@ -13,17 +13,20 @@ import { validation } from '@/lib/validation'
 
 import { getAuthUser } from '@/helpers/authUser.server'
 
+const ACCESS_DENIED_ERROR = 'Access denied. Not allowed.'
+
 export const settings = async (values: z.infer<typeof validation.settings>) => {
   const user = await getAuthUser()
 
-  if (!user) return { error: 'Access denied. Not allowed.' }
+  if (!user) return { error: ACCESS_DENIED_ERROR }
 
   const dbUser = await getUserById(user.id!)
 
-  if (!dbUser) return { error: 'Access denied. Not allowed.' }
+  if (!dbUser) return { error: ACCESS_DENIED_ERROR }
 
   // if user logged in with Google or GitHub following fields wont be allowed to modify
   if (user.isOAuth) {
+    values.name = undefined
     values.email = undefined
     values.password = undefined
     values.confirm_password = undefined
